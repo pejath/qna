@@ -13,6 +13,8 @@ gem 'puma', '~> 5.0'
 gem 'sass-rails', '>= 6'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder', '~> 2.7'
+gem "net-http"
+gem 'pry'
 # Use Redis adapter to run Action Cable in production
 # gem 'redis', '~> 4.0'
 # Use Active Model has_secure_password
@@ -41,6 +43,10 @@ group :development do
   gem 'spring'
 end
 
+group :development, :test do
+  gem 'factory_bot_rails'
+end
+
 group :test do
   # Adds support for Capybara system testing and selenium driver
   gem 'capybara', '>= 3.26'
@@ -48,7 +54,7 @@ group :test do
   # Easy installation and use of web drivers to run system tests with browsers
   gem 'webdrivers'
   gem 'shoulda-matchers', '~> 5.0'
-  gem 'factory_bot_rails'
+  gem 'database_cleaner-active_record'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
