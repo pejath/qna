@@ -15,6 +15,7 @@ gem 'sass-rails', '>= 6'
 gem 'jbuilder', '~> 2.7'
 gem "net-http"
 gem 'pry'
+gem 'slim-rails'
 # Use Redis adapter to run Action Cable in production
 # gem 'redis', '~> 4.0'
 # Use Active Model has_secure_password
@@ -55,6 +56,7 @@ group :test do
   gem 'webdrivers'
   gem 'shoulda-matchers', '~> 5.0'
   gem 'database_cleaner-active_record'
+  gem 'rails-controller-testing'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
