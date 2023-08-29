@@ -10,11 +10,6 @@ RSpec.describe QuestionsController, type: :controller do
 
     before { get :index }
 
-    it 'populates an array of all questions' do
-
-      expect(assigns(:questions)).to match_array(questions)
-    end
-
     it 'renders the index template' do
       expect(response).to render_template :index
     end
@@ -22,10 +17,6 @@ RSpec.describe QuestionsController, type: :controller do
 
   describe 'GET #show' do
     before { get :show, params: { id: question } }
-
-    it 'assigns the requested question to @question' do
-      expect(assigns(:question)).to eq question
-    end
 
     it 'renders the show template' do
       expect(response).to render_template :show
@@ -35,10 +26,6 @@ RSpec.describe QuestionsController, type: :controller do
   describe 'GET #new' do
     before { get :new }
 
-    it 'assigns the requested Question to @question' do
-      expect(assigns(:question)).to be_a_new(Question)
-    end
-
     it 'renders the new template' do
       expect(response).to render_template :new
     end
@@ -46,10 +33,6 @@ RSpec.describe QuestionsController, type: :controller do
 
   describe 'GET #edit' do
     before { get :edit, params: { id: question } }
-
-    it 'assigns the requested Question to @question' do
-      expect(assigns(:question)).to eq question
-    end
 
     it 'renders the edit template' do
       expect(response).to render_template :edit
@@ -61,16 +44,10 @@ RSpec.describe QuestionsController, type: :controller do
       it "saves a new question in the database" do
         expect { post :create, params: { question: attributes_for(:question) } }.to change(Question, :count).by(1)
       end
-
-      it "redirects to show" do
-        post :create, params: { question: attributes_for(:question) }
-
-        expect(response).to redirect_to(assigns(:question))
-      end
     end
 
     context "with invalid attributes" do
-      it "saves a new question in the database" do
+      it "doesn't save a new question in the database" do
         expect { post :create, params: { question: attributes_for(:question, :invalid) } }.not_to change(Question, :count)
       end
 
@@ -87,10 +64,6 @@ RSpec.describe QuestionsController, type: :controller do
 
     context 'with valid attributes' do
       let(:params) { { title: "New Title", body: "New Body" } }
-
-      it 'assigns the requested question to @question' do
-        expect(assigns(:question)).to eq question
-      end
 
       it 'changes question attributes' do
         question.reload

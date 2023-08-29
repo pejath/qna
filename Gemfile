@@ -16,6 +16,7 @@ gem 'jbuilder', '~> 2.7'
 gem "net-http"
 gem 'pry'
 gem 'slim-rails'
+gem 'decent_exposure', '~> 3.0'
 # Use Redis adapter to run Action Cable in production
 # gem 'redis', '~> 4.0'
 # Use Active Model has_secure_password
