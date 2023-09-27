@@ -1,6 +1,12 @@
+# frozen_string_literal: true
+
 class QuestionsController < ApplicationController
+  before_action :authenticate_user!, except: %i[index show]
   expose :questions, -> { Question.all }
   expose :question
+
+  expose :answers, from: :question
+  expose :answer, -> { Answer.new }
 
   def destroy
     question.destroy
@@ -17,9 +23,8 @@ class QuestionsController < ApplicationController
   end
 
   def create
-    question = Question.new(question_params)
     if question.save
-      redirect_to question
+      redirect_to question, notice: 'Your question successfully created.'
     else
       render :new
     end
