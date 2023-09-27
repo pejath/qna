@@ -23,6 +23,8 @@ class QuestionsController < ApplicationController
   end
 
   def create
+    question.user = current_user
+
     if question.save
       redirect_to question, notice: 'Your question successfully created.'
     else

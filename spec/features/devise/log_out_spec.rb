@@ -7,7 +7,6 @@ feature 'User can log out', "
   As an authorized user
   I'd like to be able to sign out
 " do
-
   given(:user) { create(:user) }
 
   scenario 'Authorized user triesto log out' do
