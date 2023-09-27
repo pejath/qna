@@ -8,5 +8,11 @@ FactoryBot.define do
     trait :invalid do
       title { nil }
     end
+
+    trait :answer do
+      after(:create) do |question|
+        create(:answer, question_id: question.id)
+      end
+    end
   end
 end
