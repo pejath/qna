@@ -22,7 +22,7 @@ feature 'Author can destroy answer', "
 
   scenario 'another user cannot delete someones answer', js: true do
     visit question_path(question)
-    within ".answers" do
+    within '.answers' do
       expect(page).to_not have_link 'Delete'
     end
   end
