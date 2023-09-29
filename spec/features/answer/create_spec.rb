@@ -10,7 +10,7 @@ feature 'User can create question', "
   given(:user) { create(:user) }
   given(:question) { create(:question) }
 
-  describe 'Authenticated user' do
+  describe 'Authenticated user', js: true do
     background do
       sign_in(user)
       visit question_path(question)
@@ -20,9 +20,17 @@ feature 'User can create question', "
       fill_in 'answer[body]', with: 'MyAnswer'
       click_on 'Answer'
 
-      expect(page).to have_content 'Your answer successfully created.'
-      expect(page).to have_content 'MyAnswer'
       expect(page).to have_content 'Title'
+      expect(current_path).to eq question_path(question)
+      within '.answers' do
+        expect(page).to have_content 'MyAnswer'
+      end
+    end
+
+    scenario 'answers the question with errors' do
+      click_on 'Answer'
+
+      expect(page).to have_content("Body can't be blank")
     end
 
     scenario 'answers the question with errors' do

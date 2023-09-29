@@ -8,22 +8,17 @@ class AnswersController < ApplicationController
   def create
     answer.question = question
     answer.user_id = current_user.id
+    answer.save
+  end
 
-    if answer.save
-      redirect_to answer.question, notice: 'Your answer successfully created.'
-    else
-      redirect_to answer.question, notice: answer.errors.full_messages
-    end
+  def update
+    @answers = answer.question.answers
+    answer.update(answer_params)
   end
 
   def destroy
-    if current_user.id == answer.user_id
-      answer.destroy
-      flash[:notice] = 'The answer was successfully destroyed.'
-      redirect_to answer.question
-    else
-      redirect_to answer.question, notice: 'Only an author can do it.'
-    end
+    @answers = answer.question.answers
+    answer.destroy
   end
 
   private

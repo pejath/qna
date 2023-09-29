@@ -2,16 +2,11 @@ h1
   = question.title
 p
   = question.body
-p
   = link_to 'Delete', question, method: :delete, confirm: 'Are you sure?'
-= render 'shared/errors', resource: answer
-= form_with model: [question, answer] do |f|
+.answer-errors
+= form_with model: [question, answer], local: false, class: 'new-answer' do |f|
   = f.label :body, 'Your answer'
   = f.text_area :body
   = f.submit 'Answer'
-ul
-  - answers.each do |answer|
-    li
-      = answer.body
-      p
-        = button_to 'Delete Answer', answer, method: :delete, data: { confirm: 'Are you sure?' }
+.answers
+  = render answers
