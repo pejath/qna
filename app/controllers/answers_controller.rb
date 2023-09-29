@@ -21,6 +21,10 @@ class AnswersController < ApplicationController
     answer.destroy
   end
 
+  def mark_the_best
+    answer.mark_the_best
+  end
+
   private
 
   def answer_params

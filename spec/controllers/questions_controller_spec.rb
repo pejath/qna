@@ -69,7 +69,7 @@ RSpec.describe QuestionsController, type: :controller do
   describe 'PATCH #update' do
     before { login(user) }
 
-    before { patch :update, params: { id: question, question: params } }
+    before { patch :update, params: { id: question, question: params }, format: :js }
 
     context 'with valid attributes' do
       let(:params) { { title: 'New Title', body: 'New Body' } }
@@ -96,8 +96,8 @@ RSpec.describe QuestionsController, type: :controller do
         expect(question.body).to eq 'body'
       end
 
-      it 're-renders edit view' do
-        expect(response).to render_template :edit
+      it 'uses update js' do
+        expect(response).to render_template :update
       end
     end
   end
