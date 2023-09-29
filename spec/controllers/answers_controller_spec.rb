@@ -4,21 +4,21 @@ require 'rails_helper'
 
 RSpec.describe AnswersController, type: :controller do
   let(:user) { create(:user) }
+  let(:question) { create(:question) }
   before { sign_in(user) }
 
   describe 'POST #create' do
-    subject(:http_request) { post :create, params: params }
-    let(:question) { create(:question) }
+    subject(:http_request) { post :create, params: params, format: :js }
 
     context 'with valid attributes' do
-      let(:params) { { question_id: question, answer: attributes_for(:answer, question: question) } }
+      let(:params) { { answer: attributes_for(:answer, question: question), question_id: question.id } }
 
       it 'saves a new answer in the database' do
         expect { http_request }.to change(Answer, :count).by(1)
       end
 
       it 'redirects to associated question' do
-        expect(http_request).to redirect_to question
+        expect(http_request).to render_template :create
       end
 
       it 'saves a answer with correct association' do
@@ -35,7 +35,38 @@ RSpec.describe AnswersController, type: :controller do
       end
 
       it 're-render question#show' do
-        expect(http_request).to redirect_to question
+        expect(http_request).to render_template :create
+      end
+    end
+  end
+
+  describe 'PATCH #upadte' do
+    subject(:http_request) { patch :update, params: params, format: :js }
+    let!(:answer) { create(:answer, question: question) }
+
+    context 'with valid attributes' do
+      let(:params) { { id: answer.id, answer: { body: 'new body' } } }
+
+      it 'changes answer attributes' do
+        http_request
+        answer.reload
+        expect(answer.body).to eq('new body')
+      end
+
+      it 'renders update view' do
+        expect(http_request).to render_template :update
+      end
+    end
+
+    context 'with invalid attributes' do
+      let(:params) { { id: answer.id, answer: attributes_for(:answer, :invalid) } }
+
+      it 'does not change answer attrinutes' do
+        expect { http_request }.to_not change(answer, :body)
+      end
+
+      it 'renders update view' do
+        expect(http_request).to render_template :update
       end
     end
   end

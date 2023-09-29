@@ -17,9 +17,11 @@ gem 'sass-rails', '>= 6'
 gem 'decent_exposure', '~> 3.0'
 gem 'devise'
 gem 'jbuilder', '~> 2.7'
+gem 'jquery-rails', '~> 4.6'
 gem 'net-http'
 gem 'pry'
 gem 'slim-rails'
+gem 'turbolinks', '~> 5.2.0'
 # Use Redis adapter to run Action Cable in production
 # gem 'redis', '~> 4.0'
 # Use Active Model has_secure_password

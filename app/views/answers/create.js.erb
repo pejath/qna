@@ -1,0 +1,6 @@
+$('.answer-errors').html('<%= render 'shared/errors', resource: answer %>')
+
+<% if answer.persisted? %>
+  $('.new-answer #answer_body').val('');
+  $('.answers').append('<%= j render answer %>');
+<% end %>

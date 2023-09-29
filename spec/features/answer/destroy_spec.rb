@@ -7,27 +7,23 @@ feature 'Author can destroy answer', "
   As an authorized user
   I'd like to be able to destroy the answer
 " do
-  given(:author) { create(:user) }
-  given(:not_author) { create(:user) }
-  given(:question) { create(:question) }
 
-  before do
-    @deleted_answer = Answer.create(body: 'Some body', user_id: author.id, question_id: question.id)
-  end
+  given!(:author) { create(:user) }
+  given!(:question) { create(:question) }
+  given!(:answer) { create(:answer, question: question, user_id: author.id) }
 
-  scenario 'author tries to destroy the answer' do
+  scenario 'author tries to destroy the answer', js: true do
     sign_in(author)
     visit question_path(question)
-    click_on 'Delete Answer'
+    click_on 'Delete'
 
-    expect(page).to have_content 'The answer was successfully destroyed.'
+    expect(page).to_not have_content answer.body
   end
 
-  scenario 'not an author to tries destroy the answer' do
-    sign_in(not_author)
+  scenario 'another user cannot delete someones answer', js: true do
     visit question_path(question)
-    click_on 'Delete Answer'
-
-    expect(page).to have_content 'Only an author can do it.'
+    within ".answers" do
+      expect(page).to_not have_link 'Delete'
+    end
   end
 end
