@@ -51,6 +51,7 @@ group :development do
 end
 
 group :development, :test do
+  gem 'dotenv-rails'
   gem 'factory_bot_rails'
 end
 

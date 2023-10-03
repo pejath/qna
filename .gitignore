@@ -30,3 +30,4 @@
 
 /config/database.yml
 .idea
+/.env
