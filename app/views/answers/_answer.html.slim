@@ -4,6 +4,13 @@ li
   - if answer.best
     'Best answer:
   = answer.body
+  div
+    - if answer.files.attached?
+      - answer.files.each do |file|
+        p.file-container
+          = link_to file.filename.to_s, url_for(file)
+          - if current_user == answer.user
+            = link_to 'delete file', purge_file_path(file), method: :delete, remote: true, class: 'delete-file-link'
 
 - if current_user&.id == answer.user_id
   p= link_to 'Edit', '#', class: 'edit-answer-link', data: { answer_id: answer.id }
@@ -12,4 +19,7 @@ li
   = form_with model: answer, local: false, class: 'hidden', html: { id: "edit-answer-#{answer.id}" } do |f|
     = f.label :body, 'Your answer'
     = f.text_area :body
+    p
+    = f.label :files
+    = f.file_field :files, multiple: true
     = f.submit 'Save'

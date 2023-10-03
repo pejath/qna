@@ -1,10 +1,19 @@
 .question
   = render question
+div
+  - if question.files.attached?
+    - question.files.each do |file|
+      p.file-container
+        = link_to file.filename.to_s, url_for(file)
+        - if current_user == question.user
+          = link_to 'delete file', purge_file_path(file), method: :delete, remote: true, class: 'delete-file-link'
 
 .answer-errors
 = form_with model: [question, answer], local: false, class: 'new-answer' do |f|
   = f.label :body, 'Your answer'
   = f.text_area :body
+  = f.label :files
+  = f.file_field :files, multiple: true
   = f.submit 'Answer'
 .answers
   = render answers

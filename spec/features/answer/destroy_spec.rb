@@ -7,7 +7,6 @@ feature 'Author can destroy answer', "
   As an authorized user
   I'd like to be able to destroy the answer
 " do
-
   given!(:author) { create(:user) }
   given!(:question) { create(:question) }
   given!(:answer) { create(:answer, question: question, user_id: author.id) }
