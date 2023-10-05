@@ -31,3 +31,4 @@
 /config/database.yml
 .idea
 /.env
+/node_modules

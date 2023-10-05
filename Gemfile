@@ -22,6 +22,7 @@ gem 'net-http'
 gem 'pry'
 gem 'slim-rails'
 gem 'turbolinks', '~> 5.2.0'
+gem "cocoon"
 # Use Redis adapter to run Action Cable in production
 # gem 'redis', '~> 4.0'
 # Use Active Model has_secure_password
