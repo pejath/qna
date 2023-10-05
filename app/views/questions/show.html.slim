@@ -7,7 +7,11 @@ div
         = link_to file.filename.to_s, url_for(file)
         - if current_user == question.user
           = link_to 'delete file', purge_file_path(file), method: :delete, remote: true, class: 'delete-file-link'
-
+.links
+  p Links:
+  ul
+    -question.links.each do |link|
+      li= link_to link.name, link.url
 .answer-errors
 = form_with model: [question, answer], local: false, class: 'new-answer' do |f|
   = f.label :body, 'Your answer'
