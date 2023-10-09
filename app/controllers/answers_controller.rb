@@ -23,6 +23,8 @@ class AnswersController < ApplicationController
 
   def mark_the_best
     answer.mark_the_best
+    question.reward.user = answer.user
+    question.reward.save
   end
 
   private

@@ -34,11 +34,12 @@ class QuestionsController < ApplicationController
 
   def new
     question.links.new
+    question.reward.new
   end
 
   private
 
   def question_params
-    params.require(:question).permit(:title, :body, files: [], links_attributes: [:name, :url, :_destroy])
+    params.require(:question).permit(:title, :body, files: [], links_attributes: [:name, :url, :_destroy], reward_attributes: %i[title image])
   end
 end

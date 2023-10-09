@@ -6,6 +6,8 @@ Rails.application.routes.draw do
   root to: 'questions#index'
   delete 'files/:id/purge', to: 'files#purge', as: 'purge_file'
 
+  resources :rewards, only: :index
+
   resources :questions, shallow: true do
     resources :answers, shallow: true, only: %i[create update destroy] do
       post :mark_the_best, on: :member
