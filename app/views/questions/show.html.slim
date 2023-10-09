@@ -10,8 +10,12 @@ div
 .links
   p Links:
   ul
-    -question.links.each do |link|
-      li= link_to link.name, link.url
+    -question.links.sort_by{|a| a.is_gist? ? 1 : 0}.each do |link|
+      - if link.is_gist?
+        code data-gist-id="#{link.gist_id}"
+      - else
+        li= link_to link.name, link.url
+
 .answer-errors
 = form_with model: [question, answer], local: false, class: 'new-answer' do |f|
   = f.label :body, 'Your answer'
