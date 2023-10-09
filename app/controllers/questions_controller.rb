@@ -18,6 +18,10 @@ class QuestionsController < ApplicationController
     question.update(question_params)
   end
 
+  def show
+    answer.links.new
+  end
+
   def create
     question.user = current_user
 
