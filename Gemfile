@@ -14,6 +14,7 @@ gem 'puma', '~> 5.0'
 # Use SCSS for stylesheets
 gem 'sass-rails', '>= 6'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
+gem 'cocoon'
 gem 'decent_exposure', '~> 3.0'
 gem 'devise'
 gem 'jbuilder', '~> 2.7'
@@ -22,10 +23,9 @@ gem 'net-http'
 gem 'pry'
 gem 'slim-rails'
 gem 'turbolinks', '~> 5.2.0'
-gem "cocoon"
 
 gem 'sprockets', '~> 4'
-gem 'sprockets-rails', :require => 'sprockets/railtie'
+gem 'sprockets-rails', require: 'sprockets/railtie'
 
 # Use Redis adapter to run Action Cable in production
 # gem 'redis', '~> 4.0'

@@ -32,7 +32,6 @@ feature 'User can create question', "
     end
 
     scenario 'adds and removes multiple links to question' do
-
       click_on 'add link'
       expect(page).to have_selector('.nested-fields', count: 3)
       click_on 'remove link'
