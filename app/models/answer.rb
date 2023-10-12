@@ -1,14 +1,13 @@
 # frozen_string_literal: true
 
 class Answer < ApplicationRecord
+  include LinkConcern
+  include VoteConcern
+
   belongs_to :question
   belongs_to :user
 
   has_many_attached :files
-  has_many :links, as: :linkable, dependent: :destroy
-
-  accepts_nested_attributes_for :links, reject_if: :all_blank
-
   validates :body, presence: true
 
   scope :sort_by_best, -> { order(best: :desc) }

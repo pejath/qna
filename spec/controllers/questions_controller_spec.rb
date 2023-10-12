@@ -66,6 +66,91 @@ RSpec.describe QuestionsController, type: :controller do
     end
   end
 
+  describe 'POST #vote' do
+    subject(:http_request) { post :vote, params: params, format: :json }
+    let(:author) { create(:user) }
+    let(:vote_question) { create(:question, user: author) }
+
+    describe 'upvote action' do
+      let(:params) { { id: vote_question.id, vote_action: 'upvote' } }
+
+      context 'unauthenticated user' do
+        it 'can not upvote the question' do
+          expect { http_request }.to_not change(Vote, :count)
+        end
+      end
+
+      context 'authenticated user' do
+        before { login(user) }
+
+        it 'upvote the question' do
+          expect { http_request }.to change(Vote, :count).by(1)
+        end
+      end
+
+      context 'author of the question' do
+        before { login(author) }
+
+        it 'can not upvote the question' do
+          expect { http_request }.to_not change(Vote, :count)
+        end
+      end
+    end
+
+    describe 'downvote action' do
+      let(:params) { { id: vote_question.id, vote_action: 'downvote' } }
+
+      context 'unauthenticated user' do
+        it 'can not downvote the question' do
+          expect { http_request }.to_not change(Vote, :count)
+        end
+      end
+
+      context 'authenticated user' do
+        before { login(user) }
+
+        it 'downvote the question' do
+          expect { http_request }.to change(Vote, :count).by(1)
+        end
+      end
+
+      context 'author of the question' do
+        before { login(author) }
+
+        it 'can not downvote the question' do
+          expect { http_request }.to_not change(Vote, :count)
+        end
+      end
+    end
+
+    describe 'unvote action' do
+      let(:params) { { id: vote_question.id, vote_action: 'unvote' } }
+      let!(:vote) { create(:vote, user: user, votable: vote_question) }
+
+      context 'unauthenticated user' do
+        it 'can not unvote the question' do
+          expect { http_request }.to_not change(Vote, :count)
+        end
+      end
+
+      context 'authenticated user' do
+        before { login(user) }
+
+        it 'unvote the question' do
+          expect { http_request }.to change(Vote, :count).by(-1)
+        end
+      end
+
+      context 'author of the question' do
+        before { login(author) }
+
+        it 'can not unvote the question' do
+          expect { http_request }.to_not change(Vote, :count)
+        end
+      end
+    end
+  end
+
   describe 'PATCH #update' do
     before { login(user) }
 

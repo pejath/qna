@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class QuestionsController < ApplicationController
+  include Voted
+
   before_action :authenticate_user!, except: %i[index show]
   expose :questions, -> { Question.all }
   expose :question
@@ -40,6 +42,6 @@ class QuestionsController < ApplicationController
   private
 
   def question_params
-    params.require(:question).permit(:title, :body, files: [], links_attributes: %i[name url _destroy], reward_attributes: %i[title image])
+    params.require(:question).permit(:title, :body, :vote_action, files: [], links_attributes: %i[name url _destroy], reward_attributes: %i[title image])
   end
 end
