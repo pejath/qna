@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class AnswersController < ApplicationController
+  include Voted
+
   before_action :authenticate_user!
   expose :question
   expose :answer
@@ -30,6 +32,6 @@ class AnswersController < ApplicationController
   private
 
   def answer_params
-    params.require(:answer).permit(:body, files: [], links_attributes: %i[name url _destroy])
+    params.require(:answer).permit(:body, :vote_action, files: [], links_attributes: %i[name url _destroy])
   end
 end

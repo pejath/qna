@@ -8,5 +8,14 @@ class User < ApplicationRecord
 
   has_many :questions, dependent: :destroy
   has_many :answers, dependent: :destroy
+  has_many :votes, dependent: :destroy
   has_many :rewards, dependent: :nullify
+
+  def is_author?(resource)
+    resource.user_id == id
+  end
+
+  def voted?(resource)
+    votes.where(votable_id: resource).present?
+  end
 end
