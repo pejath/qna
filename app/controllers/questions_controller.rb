@@ -2,6 +2,7 @@
 
 class QuestionsController < ApplicationController
   include Voted
+  include Commented
 
   before_action :gon_question_id, only: :show
   before_action :gon_question_user_id, only: :show

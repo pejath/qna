@@ -12,10 +12,16 @@ Rails.application.routes.draw do
     end
   end
 
+  concern :commentable do
+    member do
+      post :add_comment
+    end
+  end
+
   resources :rewards, only: :index
 
-  resources :questions, concerns: :votable, shallow: true do
-    resources :answers, concerns: :votable, shallow: true, only: %i[create update destroy] do
+  resources :questions, concerns: %i[votable commentable], shallow: true do
+    resources :answers, concerns: %i[votable commentable], shallow: true, only: %i[create update destroy] do
       post :mark_the_best, on: :member
     end
   end
