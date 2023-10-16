@@ -13,16 +13,17 @@ li[id="answer-#{answer.id}"]
             = link_to 'delete file', purge_file_path(file), method: :delete, remote: true, class: 'delete-file-link'
     - answer.links.each do |link|
       p= link_to link.name, link.url
+  .rating
+    'Rating:
+    = answer.rating
   - if !current_user&.is_author?(answer) && signed_in?
-    .rating
-      'Rating:
-      = answer.rating
     .vote-container *{class: [vote_display(answer)]}
       =link_to "↑", vote_answer_path(vote_action: 'upvote', id: answer.id), method: :post, remote: true
       br
       =link_to "↓", vote_answer_path(vote_action: 'downvote', id: answer.id), method: :post, remote: true
     .unvote-container *{class: [unvote_display(answer)]}
       =link_to "Unvote", vote_answer_path(vote_action: 'unvote', id: answer.id), method: :post, remote: true
+
 - if current_user&.id == answer.user_id
   p= link_to 'Edit', '#', class: 'edit-answer-link', data: { answer_id: answer.id }
   p= link_to 'Delete answer', answer_path(answer), method: :delete, remote: true

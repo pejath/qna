@@ -9,6 +9,8 @@
     <%= javascript_include_tag "application" %>
     <%= javascript_include_tag :cocoon %>
     <%= stylesheet_link_tag 'application', media: 'all' %>
+    <%= include_gon(:init => true) %>
+    <%= action_cable_meta_tag %>
   </head>
 
   <body>

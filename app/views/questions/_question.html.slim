@@ -20,10 +20,10 @@ p
       = f.submit 'Save'
 
       = link_to 'Delete question', question, method: :delete
+.rating
+  'Rating:
+  = question.rating
 - if !current_user&.is_author?(question) && signed_in?
-  .rating
-    'Rating:
-    = question.rating
   .vote-container *{class: [vote_display(question)]}
     =link_to "↑", vote_question_path(vote_action: 'upvote', id: question.id), method: :post, remote: true
     br

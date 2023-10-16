@@ -11,14 +11,14 @@ div
 .links
   p Links:
   ul
-    -question.links.sort_by{|a| a.is_gist? ? 1 : 0}.each do |link|
+    - question.links.sort_by { |a| a.is_gist? ? 1 : 0 }.each do |link|
       - if link.is_gist?
         code data-gist-id="#{link.gist_id}"
       - else
         li= link_to link.name, link.url
 
 .answer-errors
-= form_with model: [question, answer], class: 'new-answer' do |f|
+= form_with model: [question, answer], local: false, class: 'new-answer' do |f|
   = f.label :body, 'Your answer'
   = f.text_area :body
   = f.label :files

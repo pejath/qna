@@ -3,7 +3,11 @@
 class QuestionsController < ApplicationController
   include Voted
 
+  before_action :gon_question_id, only: :show
+  before_action :gon_question_user_id, only: :show
   before_action :authenticate_user!, except: %i[index show]
+  after_action :publish_question, only: :create
+
   expose :questions, -> { Question.all }
   expose :question
 
@@ -36,10 +40,25 @@ class QuestionsController < ApplicationController
 
   def new
     question.links.new
-    question.reward.new
+    reward = Reward.new
+    question.reward = reward
   end
 
   private
+
+  def gon_question_id
+    gon.question_id = question.id
+  end
+
+  def gon_question_user_id
+    gon.question_user_id = question.user_id
+  end
+
+  def publish_question
+    return if question.errors.any?
+
+    ActionCable.server.broadcast 'questions', question
+  end
 
   def question_params
     params.require(:question).permit(:title, :body, :vote_action, files: [], links_attributes: %i[name url _destroy], reward_attributes: %i[title image])
