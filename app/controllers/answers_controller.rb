@@ -3,7 +3,10 @@
 class AnswersController < ApplicationController
   include Voted
 
+
   before_action :authenticate_user!
+  after_action :publish_answer, only: :create
+
   expose :question
   expose :answer
 
@@ -30,6 +33,11 @@ class AnswersController < ApplicationController
   end
 
   private
+
+  def publish_answer
+    return if answer.errors.any?
+    ActionCable.server.broadcast "question_#{question.id}_answers", answer
+  end
 
   def answer_params
     params.require(:answer).permit(:body, :vote_action, files: [], links_attributes: %i[name url _destroy])
