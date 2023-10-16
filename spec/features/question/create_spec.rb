@@ -52,8 +52,8 @@ feature 'User can create question', "
     scenario 'asks a question with reward' do
       fill_in 'Title', with: 'Test question'
       fill_in 'Body', with: 'text text text'
-      fill_in 'Reward name', with: 'Test name'
-      attach_file 'Image', "#{Rails.root}/app/assets/images/kit.png"
+      fill_in 'question[reward_attributes][title]', with: 'Test name'
+      attach_file 'Image', "#{Rails.root}/app/assets/images/kit.jpg"
       click_on 'Ask'
     end
   end
@@ -63,5 +63,34 @@ feature 'User can create question', "
     click_on 'Ask question'
 
     expect(page).to have_content 'You need to sign in or sign up before continuing.'
+  end
+
+  context 'multiple sessions' do
+    scenario "questions appears on another user's page", js: true do
+      Capybara.using_session('user') do
+        sign_in(user)
+        visit questions_path
+      end
+
+      Capybara.using_session('guest') do
+        visit questions_path
+      end
+
+      Capybara.using_session('user') do
+        click_on 'Ask question'
+
+        fill_in 'Title', with: 'Test question'
+        fill_in 'Body', with: 'session'
+        click_on 'Ask'
+
+        expect(page).to have_content 'Your question successfully created.'
+        expect(page).to have_content 'Test question'
+        expect(page).to have_content 'session'
+      end
+
+      Capybara.using_session('guest') do
+        expect(page).to have_content 'Test question'
+      end
+    end
   end
 end

@@ -19,4 +19,6 @@ Rails.application.routes.draw do
       post :mark_the_best, on: :member
     end
   end
+
+  mount ActionCable.server => '/cable'
 end

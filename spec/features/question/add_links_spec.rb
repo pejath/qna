@@ -17,7 +17,7 @@ feature 'User can add links to question', "
     fill_in 'Title', with: 'Test question'
     fill_in 'Body', with: 'text text text'
 
-    fill_in 'Link name', with: 'My gist'
+    fill_in 'question[links_attributes][0][name]', with: 'My gist'
     fill_in 'Url', with: gist_url
 
     click_on 'Ask'
