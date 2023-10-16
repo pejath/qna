@@ -3,6 +3,7 @@
 class Answer < ApplicationRecord
   include LinkConcern
   include VoteConcern
+  include CommentConcern
 
   belongs_to :question
   belongs_to :user

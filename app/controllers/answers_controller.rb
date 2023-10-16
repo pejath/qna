@@ -2,7 +2,7 @@
 
 class AnswersController < ApplicationController
   include Voted
-
+  include Commented
 
   before_action :authenticate_user!
   after_action :publish_answer, only: :create
@@ -36,6 +36,7 @@ class AnswersController < ApplicationController
 
   def publish_answer
     return if answer.errors.any?
+
     ActionCable.server.broadcast "question_#{question.id}_answers", answer
   end
 

@@ -30,3 +30,11 @@ p
     =link_to "↓", vote_question_path(vote_action: 'downvote', id: question.id), method: :post, remote: true
   .unvote-container *{class: [unvote_display(question)]}
     =link_to "Unvote", vote_question_path(vote_action: 'unvote', id: question.id), method: :post, remote: true
+
+.comments
+  b Comments:
+  = render question.comments
+
+.comments-form
+  -if signed_in?
+    = render 'comments/form', commentable: question
