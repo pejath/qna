@@ -26,6 +26,10 @@ gem 'skim'
 gem 'slim-rails'
 gem 'turbolinks', '~> 5.2.0'
 
+gem 'omniauth'
+gem 'omniauth-github'
+gem 'omniauth-rails_csrf_protection'
+
 gem 'sprockets', '~> 4'
 gem 'sprockets-rails', require: 'sprockets/railtie'
 
