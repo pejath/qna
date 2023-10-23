@@ -274,6 +274,16 @@ Devise.setup do |config|
   # config.omniauth :github, 'APP_ID', 'APP_SECRET', scope: 'user,public_repo'
   config.omniauth :github, ENV['GITHUB_CLIENT_ID'], ENV["GITHUB_CLIENT_SECRET"], scope: 'user:email, read:user'
 
+  config.omniauth :vkontakte,
+                  ENV['VK_APP_ID'],
+                  ENV['Vk_CLIENT_SECRET'],
+                  scope: 'user:email, read:user',
+                  display: 'page',
+                  lang: 'en',
+                  https: 1,
+                  image_size: 'original',
+                  client_options: { auth_scheme: 'request_body' }
+
   # ==> Warden configuration
   # If you want to use other strategies, that are not supported by Devise, or
   # change the failure app, you can configure them inside the config.warden block.

@@ -28,6 +28,7 @@ gem 'turbolinks', '~> 5.2.0'
 
 gem 'omniauth'
 gem 'omniauth-github'
+gem 'omniauth-vkontakte'
 gem 'omniauth-rails_csrf_protection'
 
 gem 'sprockets', '~> 4'
@@ -64,6 +65,8 @@ end
 group :development, :test do
   gem 'dotenv-rails'
   gem 'factory_bot_rails'
+  gem "localhost"
+  gem "letter_opener"
 end
 
 group :test do
@@ -75,7 +78,7 @@ group :test do
   gem 'rails-controller-testing'
   gem 'shoulda-matchers', '~> 5.0'
   gem 'webdrivers'
-
+  gem 'capybara-email'
   gem 'launchy'
 end
 

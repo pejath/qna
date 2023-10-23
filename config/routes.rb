@@ -4,7 +4,10 @@ Rails.application.routes.draw do
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
   devise_for :users, controllers: { omniauth_callbacks: 'oauth_callbacks' }
   root to: 'questions#index'
+
   delete 'files/:id/purge', to: 'files#purge', as: 'purge_file'
+
+  post 'users/set_email', to: 'users#set_email', as: 'set_email'
 
   concern :votable do
     member do
