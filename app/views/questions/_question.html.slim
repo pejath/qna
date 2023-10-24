@@ -2,7 +2,7 @@ h1
   = question.title
 p
   = question.body
-  - if user_signed_in? && current_user&.id == question.user_id
+  - if policy(question).edit?
     = link_to 'Edit', '#', class: 'edit-question-link', data: { question_id: question.id }
     = link_to 'Delete', question, method: :delete, confirm: 'Are you sure?'
   .question-errors
@@ -23,7 +23,7 @@ p
 .rating
   'Rating:
   = question.rating
-- if !current_user&.is_author?(question) && signed_in?
+- if policy(question).vote?
   .vote-container *{class: [vote_display(question)]}
     =link_to "↑", vote_question_path(vote_action: 'upvote', id: question.id), method: :post, remote: true
     br

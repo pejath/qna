@@ -1,5 +1,5 @@
 li[id="answer-#{answer.id}"]
-  - if current_user == answer.question.user && answer.persisted? && !answer.best
+  - if policy(answer).edit? && answer.persisted? && !answer.best
     = link_to 'Best', mark_the_best_answer_path(answer), method: :post, remote: true
   - if answer.best
     'Best answer:
@@ -9,14 +9,14 @@ li[id="answer-#{answer.id}"]
       - answer.files.each do |file|
         p.file-container
           = link_to file.filename.to_s, url_for(file)
-          - if current_user == answer.user
+          - if policy(answer).destroy?
             = link_to 'delete file', purge_file_path(file), method: :delete, remote: true, class: 'delete-file-link'
     - answer.links.each do |link|
       p= link_to link.name, link.url
   .rating
     'Rating:
     = answer.rating
-  - if !current_user&.is_author?(answer) && signed_in?
+  - if policy(answer).vote?
     .vote-container *{class: [vote_display(answer)]}
       =link_to "↑", vote_answer_path(vote_action: 'upvote', id: answer.id), method: :post, remote: true
       br
@@ -30,7 +30,7 @@ li[id="answer-#{answer.id}"]
   .comments-form
     - if signed_in?
       = render 'comments/form', commentable: answer
-- if current_user&.id == answer.user_id
+- if policy(answer).edit?
   p= link_to 'Edit', '#', class: 'edit-answer-link', data: { answer_id: answer.id }
   p= link_to 'Delete answer', answer_path(answer), method: :delete, remote: true
 

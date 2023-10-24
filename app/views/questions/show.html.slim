@@ -5,7 +5,7 @@ div
     - question.files.each do |file|
       p.file-container
         = link_to file.filename.to_s, url_for(file)
-        - if current_user == question.user
+        - if policy(question).destroy?
           = link_to 'delete file', purge_file_path(file), method: :delete, remote: true, class: 'delete-file-link'
 .links
   p Links:

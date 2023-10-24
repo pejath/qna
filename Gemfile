@@ -26,6 +26,8 @@ gem 'skim'
 gem 'slim-rails'
 gem 'turbolinks', '~> 5.2.0'
 
+gem "pundit", "~> 2.3"
+
 gem 'omniauth'
 gem 'omniauth-github'
 gem 'omniauth-vkontakte'
