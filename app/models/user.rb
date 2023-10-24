@@ -22,10 +22,6 @@ class User < ApplicationRecord
     authorizations.create(provider: auth.provider, uid: auth.uid)
   end
 
-  def is_author?(resource)
-    resource.user_id == id
-  end
-
   def voted?(resource)
     votes.where(votable_id: resource).present?
   end

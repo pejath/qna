@@ -16,12 +16,15 @@ class QuestionsController < ApplicationController
   expose :answer, -> { Answer.new }
 
   def destroy
+    authorize(question)
+
     question.destroy
 
     redirect_to questions_path
   end
 
   def update
+    authorize(question)
     question.update(question_params)
   end
 
@@ -31,6 +34,7 @@ class QuestionsController < ApplicationController
 
   def create
     question.user = current_user
+    authorize(question)
 
     if question.save
       redirect_to question, notice: 'Your question successfully created.'

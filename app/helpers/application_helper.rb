@@ -2,10 +2,10 @@
 
 module ApplicationHelper
   def vote_display(resource)
-    'hidden' if current_user.voted?(resource)
+    'hidden' unless policy(resource).vote?
   end
 
   def unvote_display(resource)
-    'hidden' unless current_user.voted?(resource)
+    'hidden' if policy(resource).vote?
   end
 end

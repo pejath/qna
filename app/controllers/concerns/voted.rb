@@ -5,7 +5,7 @@ module Voted
   included { before_action :set_votable, only: %i[vote upvote downvote unvote] }
 
   def vote
-    send(params[:vote_action]) unless current_user&.is_author?(@votable)
+    send(params[:vote_action]) if authorize(@votable, :vote?)
     render json: { id: @votable.id, rating: @votable.rating }
   end
 
