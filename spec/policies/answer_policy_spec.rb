@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.describe AnswerPolicy do
@@ -7,7 +9,7 @@ RSpec.describe AnswerPolicy do
 
   permissions :edit? do
     it 'grants access if user is admin' do
-      expect(subject).to permit(User.new(admin:true), create(:answer))
+      expect(subject).to permit(User.new(admin: true), create(:answer))
     end
 
     it 'grant access if user is author' do

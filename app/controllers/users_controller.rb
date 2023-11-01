@@ -21,6 +21,6 @@ class UsersController < ApplicationController
   end
 
   def oauth
-    Struct.new(:uid, :provider).new(session[:oauth]["uid"], session[:oauth]["provider"])
+    Struct.new(:uid, :provider).new(session[:oauth]['uid'], session[:oauth]['provider'])
   end
 end
