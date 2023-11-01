@@ -28,6 +28,10 @@ gem 'turbolinks', '~> 5.2.0'
 
 gem "pundit", "~> 2.3"
 
+gem "doorkeeper"
+gem 'active_model_serializers', '~>0.10'
+gem 'oj'
+
 gem 'omniauth'
 gem 'omniauth-github'
 gem 'omniauth-vkontakte'
