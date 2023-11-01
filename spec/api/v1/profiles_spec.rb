@@ -1,13 +1,17 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
-describe "Profiles API", type: :request do
-  let(:headers) { { "CONTENT_TYPE" => "application/json",
-                    "ACCEPT" => 'application/json' } }
+describe 'Profiles API', type: :request do
+  let(:headers) do
+    { 'CONTENT_TYPE' => 'application/json',
+      'ACCEPT' => 'application/json' }
+  end
 
-  describe "GET /api/v1/profiles/me" do
+  describe 'GET /api/v1/profiles/me' do
     it_behaves_like 'API Authorizable' do
       let(:method) { :get }
-      let(:api_path) { "/api/v1/profiles/me" }
+      let(:api_path) { '/api/v1/profiles/me' }
     end
 
     context 'authorized' do
@@ -30,7 +34,6 @@ describe "Profiles API", type: :request do
           expect(json).to_not have_key(attr)
         end
       end
-
     end
   end
 end

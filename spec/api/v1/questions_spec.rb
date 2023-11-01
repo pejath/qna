@@ -1,13 +1,17 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
-describe "Questions API", type: :request do
-  let(:headers) { { "CONTENT_TYPE" => "application/json",
-                    "ACCEPT" => 'application/json' } }
+describe 'Questions API', type: :request do
+  let(:headers) do
+    { 'CONTENT_TYPE' => 'application/json',
+      'ACCEPT' => 'application/json' }
+  end
 
-  describe "GET /api/v1/questions" do
+  describe 'GET /api/v1/questions' do
     it_behaves_like 'API Authorizable' do
       let(:method) { :get }
-      let(:api_path) { "/api/v1/questions" }
+      let(:api_path) { '/api/v1/questions' }
     end
 
     context 'authorized' do
@@ -41,7 +45,7 @@ describe "Questions API", type: :request do
         expect(question_response['short_title']).to eq question.title.truncate(4)
       end
 
-      describe "answers" do
+      describe 'answers' do
         let(:answer) { answers.first }
         let(:answer_response) { question_response['answers'].first }
 

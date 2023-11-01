@@ -26,16 +26,16 @@ gem 'skim'
 gem 'slim-rails'
 gem 'turbolinks', '~> 5.2.0'
 
-gem "pundit", "~> 2.3"
+gem 'pundit', '~> 2.3'
 
-gem "doorkeeper"
 gem 'active_model_serializers', '~>0.10'
+gem 'doorkeeper'
 gem 'oj'
 
 gem 'omniauth'
 gem 'omniauth-github'
-gem 'omniauth-vkontakte'
 gem 'omniauth-rails_csrf_protection'
+gem 'omniauth-vkontakte'
 
 gem 'sprockets', '~> 4'
 gem 'sprockets-rails', require: 'sprockets/railtie'
@@ -71,8 +71,8 @@ end
 group :development, :test do
   gem 'dotenv-rails'
   gem 'factory_bot_rails'
-  gem "localhost"
-  gem "letter_opener"
+  gem 'letter_opener'
+  gem 'localhost'
 end
 
 group :test do
@@ -80,12 +80,12 @@ group :test do
   gem 'capybara', '>= 3.26'
   gem 'selenium-webdriver', '>= 4.0.0.rc1'
   # Easy installation and use of web drivers to run system tests with browsers
+  gem 'capybara-email'
   gem 'database_cleaner-active_record'
+  gem 'launchy'
   gem 'rails-controller-testing'
   gem 'shoulda-matchers', '~> 5.0'
   gem 'webdrivers'
-  gem 'capybara-email'
-  gem 'launchy'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
