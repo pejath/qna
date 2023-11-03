@@ -2,5 +2,7 @@
 
 FactoryBot.define do
   factory :comment do
+    association :user
+    body {"comment body"}
   end
 end
