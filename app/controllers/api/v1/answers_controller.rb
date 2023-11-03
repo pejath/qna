@@ -53,8 +53,4 @@ class Api::V1::AnswersController < Api::V1::BaseController
   def set_answer
     @answer ||= Answer.find(params[:id])
   end
-
-  def pundit_user
-    current_resource_owner
-  end
 end
