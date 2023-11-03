@@ -6,6 +6,9 @@ RSpec.describe AnswersController, type: :controller do
   let(:user) { create(:user) }
   let(:question) { create(:question) }
 
+  it_behaves_like 'POST #vote', :answer
+  it_behaves_like 'POST #add_comment', :answer
+
   describe 'POST #create' do
     subject(:http_request) { post :create, params: params, format: :js }
     before { sign_in(user) }
@@ -36,91 +39,6 @@ RSpec.describe AnswersController, type: :controller do
 
       it 're-render question#show' do
         expect(http_request).to render_template :create
-      end
-    end
-  end
-
-  describe 'POST #vote' do
-    subject(:http_request) { post :vote, params: params, format: :json }
-    let(:author) { create(:user) }
-    let(:answer) { create(:answer, user: author) }
-
-    describe 'upvote action' do
-      let(:params) { { id: answer.id, vote_action: 'upvote' } }
-
-      context 'unauthenticated user' do
-        it 'can not upvote the answer' do
-          expect { http_request }.to_not change(Vote, :count)
-        end
-      end
-
-      context 'authenticated user' do
-        before { login(user) }
-
-        it 'upvote the answer' do
-          expect { http_request }.to change(Vote, :count).by(1)
-        end
-      end
-
-      context 'author of the answer' do
-        before { login(author) }
-
-        it 'can not upvote the answer' do
-          expect { http_request }.to_not change(Vote, :count)
-        end
-      end
-    end
-
-    describe 'downvote action' do
-      let(:params) { { id: answer.id, vote_action: 'downvote' } }
-
-      context 'unauthenticated user' do
-        it 'can not downvote the answer' do
-          expect { http_request }.to_not change(Vote, :count)
-        end
-      end
-
-      context 'authenticated user' do
-        before { login(user) }
-
-        it 'downvote the answer' do
-          expect { http_request }.to change(Vote, :count).by(1)
-        end
-      end
-
-      context 'author of the answer' do
-        before { login(author) }
-
-        it 'can not downvote the answer' do
-          expect { http_request }.to_not change(Vote, :count)
-        end
-      end
-    end
-
-    describe 'unvote action' do
-      let(:params) { { id: answer.id, vote_action: 'unvote' } }
-      let!(:vote) { create(:vote, user: user, votable: answer) }
-
-      context 'unauthenticated user' do
-        it 'can not unvote the answer' do
-          expect { http_request }.to_not change(Vote, :count)
-        end
-      end
-
-      context 'authenticated user' do
-        before { login(user) }
-
-        it 'unvote the answer' do
-          expect { http_request }.to change(Vote, :count).by(-1)
-        end
-      end
-
-      context 'author of the answer' do
-        before { login(author) }
-
-        it 'can not unvote the answer' do
-          expect { http_request }.to_not change(Vote, :count)
-        end
       end
     end
   end
