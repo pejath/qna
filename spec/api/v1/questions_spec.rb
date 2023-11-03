@@ -4,8 +4,7 @@ require 'rails_helper'
 
 describe 'Questions API', type: :request do
   let(:headers) do
-    { 'CONTENT_TYPE' => 'application/json',
-      'ACCEPT' => 'application/json' }
+    { 'ACCEPT' => 'application/json' }
   end
 
   describe 'GET /api/v1/questions' do
@@ -125,6 +124,109 @@ describe 'Questions API', type: :request do
         it 'returns list of links' do
           expect(response_question['links'].size).to eq 1
         end
+      end
+    end
+  end
+
+  describe 'POST /api/questions' do
+    it_behaves_like 'API Authorizable' do
+      let(:method) { :post }
+      let(:api_path) { "/api/v1/questions/" }
+    end
+
+    describe 'authorized' do
+      let(:me) { create(:user) }
+      let!(:question) { attributes_for(:question) }
+      let(:access_token) { create(:access_token, resource_owner_id: me.id) }
+
+      before { post "/api/v1/questions", params: { access_token: access_token.token, question: question }, headers: headers }
+
+      it 'returns that response successful' do
+        expect(response).to be_successful
+      end
+
+      it 'changes Questions count' do
+        expect(Question.count).to eq 1
+      end
+
+      context 'with invalid attributes' do
+        let!(:question) { attributes_for(:question, :invalid) }
+
+        it 'returns 422 code' do
+          expect(response.status).to eq 422
+        end
+
+        it 'do not create question' do
+          expect(Question.count).to eq 0
+        end
+      end
+    end
+  end
+
+  describe 'PATCH /api/v1/questions/:id' do
+    it_behaves_like 'API Authorizable' do
+      let(:method) { :patch }
+      let!(:question) { create(:question) }
+      let(:api_path) { "/api/v1/questions/#{question.id}" }
+    end
+
+    describe 'authorized' do
+      let(:me) { create(:user) }
+      let!(:question) { create(:question, user: me) }
+      let(:access_token) { create(:access_token, resource_owner_id: me.id) }
+      let(:http_request) { patch "/api/v1/questions/#{question.id}", params: params, headers: headers }
+
+      let(:params) { { access_token: access_token.token, question: { body: 'new body' } } }
+
+      it 'returns that response successful' do
+        http_request
+        expect(response).to be_successful
+      end
+
+      it 'changes Questions count' do
+        http_request
+        question.reload
+        expect(question.body).to eq('new body')
+      end
+
+      context 'with invalid attributes' do
+        let(:params) { { access_token: access_token.token, question: { body: nil } } }
+
+        it 'returns 422 code' do
+          http_request
+          expect(response.status).to eq 422
+        end
+
+        it 'do not update question' do
+          http_request
+          question.reload
+          expect(question.body).to eq('body')
+        end
+      end
+    end
+  end
+
+  describe 'DELETE /api/v1/questions/:id' do
+    it_behaves_like 'API Authorizable' do
+      let(:method) { :delete }
+      let!(:question) { create(:question) }
+      let(:api_path) { "/api/v1/questions/#{question.id}" }
+    end
+
+    describe 'authorized' do
+      let(:me) { create(:user) }
+      let!(:question) { create(:question, user: me) }
+      let(:access_token) { create(:access_token, resource_owner_id: me.id) }
+
+      let(:http_request) { delete "/api/v1/questions/#{question.id}", params: { access_token: access_token.token }, headers: headers }
+
+      it 'returns that response successful' do
+        http_request
+        expect(response).to be_successful
+      end
+
+      it 'changes Questions count' do
+        expect { http_request }.to change(Question, :count).by(-1)
       end
     end
   end
