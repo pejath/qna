@@ -1,11 +1,10 @@
-# frozen_string_literal: true
-
-class QuestionSerializer < ActiveModel::Serializer
+class AnswerSerializer < ActiveModel::Serializer
   include Rails.application.routes.url_helpers
 
-  attributes :id, :title, :body, :user_id, :created_at, :updated_at, :urls, :links
+  attributes :id, :body, :urls, :created_at, :updated_at, :user_id
+  belongs_to :user
+  belongs_to :question
   has_many :comments
-  has_many :answers
   has_many :links
 
   def urls
