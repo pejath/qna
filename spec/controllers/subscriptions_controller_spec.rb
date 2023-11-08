@@ -26,7 +26,7 @@ RSpec.describe SubscriptionsController, type: :controller do
   describe 'DELETE #destroy', js: true do
     subject(:http_request) { delete :destroy, params: params, format: :js }
     before { sign_in(user) }
-    let!(:sub) {create(:subscription, question: question, user: user)}
+    let!(:sub) { create(:subscription, question: question, user: user) }
 
     context 'with valid attributes' do
       let(:params) { { question_id: question } }
@@ -40,5 +40,4 @@ RSpec.describe SubscriptionsController, type: :controller do
       end
     end
   end
-
 end

@@ -1,5 +1,6 @@
-class NotificationMailer < ApplicationMailer
+# frozen_string_literal: true
 
+class NotificationMailer < ApplicationMailer
   # Subject can be set in your I18n file at config/locales/en.yml
   # with the following lookup:
   #
@@ -9,6 +10,6 @@ class NotificationMailer < ApplicationMailer
     @answer = answer
     @question = answer.question
 
-    mail to: user.email, subject: "New Answer"
+    mail to: user.email, subject: 'New Answer'
   end
 end

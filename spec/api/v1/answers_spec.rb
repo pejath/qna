@@ -42,7 +42,7 @@ describe 'Answers API', type: :request do
     context 'authorized' do
       let!(:answer) { create(:answer, :with_file, :with_link, :with_comments) }
       let(:access_token) { create(:access_token) }
-      let(:response_answer) { json["answer"] }
+      let(:response_answer) { json['answer'] }
 
       before { get "/api/v1/answers/#{answer.id}", params: { access_token: access_token.token }, headers: headers }
 

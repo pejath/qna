@@ -1,10 +1,11 @@
 # frozen_string_literal: true
+
 require 'sidekiq/web'
 
 Rails.application.routes.draw do
   use_doorkeeper
 
-  authenticate :user, lambda { |u| u.admin? } do
+  authenticate :user, ->(u) { u.admin? } do
     mount Sidekiq::Web => '/sidekiq'
   end
 
@@ -42,13 +43,13 @@ Rails.application.routes.draw do
         get :me, on: :collection
       end
 
-      resources :questions, only: [:index, :show, :update, :create, :destroy], shallow: true do
-        resources :answers, only: [:index, :show, :update, :create, :destroy], shallow: true
+      resources :questions, only: %i[index show update create destroy], shallow: true do
+        resources :answers, only: %i[index show update create destroy], shallow: true
       end
     end
   end
 
-  resource :subscription, only: [:create, :destroy]
+  resource :subscription, only: %i[create destroy]
 
   mount ActionCable.server => '/cable'
 end

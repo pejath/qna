@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class DailyDigestService
   def send_digest
     if any_last_questions?

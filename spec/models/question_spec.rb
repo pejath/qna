@@ -8,7 +8,6 @@ RSpec.describe Question, type: :model do
   it_behaves_like 'linkable'
   it_behaves_like 'votable'
 
-
   describe 'validations' do
     it { is_expected.to validate_presence_of(:title) }
     it { is_expected.to validate_presence_of(:body) }
