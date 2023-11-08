@@ -15,6 +15,7 @@ RSpec.describe Question, type: :model do
   end
 
   describe 'relations' do
+    it { is_expected.to have_many(:subscriptions).dependent(:destroy) }
     it { is_expected.to have_many(:answers) }
     it { is_expected.to have_one(:reward) }
     it { is_expected.to accept_nested_attributes_for(:reward) }

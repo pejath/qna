@@ -1,3 +1,9 @@
+.subscription
+  -if current_user&.subscriptions&.find_by(question: question)
+    = link_to "Unsubscribe", subscription_path(question_id: question.id), method: :delete, remote: true, local: false
+  -elsif current_user
+    = link_to "Subscribe", subscription_path(question_id: question.id), method: :post, remote: true, local: false
+
 h1
   = question.title
 p

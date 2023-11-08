@@ -32,6 +32,10 @@ gem 'active_model_serializers', '~>0.10'
 gem 'doorkeeper'
 gem 'oj'
 
+gem 'sidekiq'
+gem 'sinatra', require: false
+gem 'whenever', require: false
+
 gem 'omniauth'
 gem 'omniauth-github'
 gem 'omniauth-rails_csrf_protection'
