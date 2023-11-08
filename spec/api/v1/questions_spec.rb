@@ -131,7 +131,7 @@ describe 'Questions API', type: :request do
   describe 'POST /api/questions' do
     it_behaves_like 'API Authorizable' do
       let(:method) { :post }
-      let(:api_path) { "/api/v1/questions/" }
+      let(:api_path) { '/api/v1/questions/' }
     end
 
     describe 'authorized' do
@@ -139,7 +139,7 @@ describe 'Questions API', type: :request do
       let!(:question) { attributes_for(:question) }
       let(:access_token) { create(:access_token, resource_owner_id: me.id) }
 
-      before { post "/api/v1/questions", params: { access_token: access_token.token, question: question }, headers: headers }
+      before { post '/api/v1/questions', params: { access_token: access_token.token, question: question }, headers: headers }
 
       it 'returns that response successful' do
         expect(response).to be_successful

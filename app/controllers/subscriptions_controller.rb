@@ -14,6 +14,6 @@ class SubscriptionsController < ApplicationController
   private
 
   def question
-    @question ||= params["question_id"] ? Question.find(params["question_id"]) : Question.new
+    @question ||= params['question_id'] ? Question.find(params['question_id']) : Question.new
   end
 end

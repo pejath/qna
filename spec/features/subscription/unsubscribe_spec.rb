@@ -7,7 +7,6 @@ feature 'User can unsubscribe from question', "
   As an authenticated user
   I'd like to be able to stop receiving notices
 " do
-
   given!(:user) { create(:user) }
   given!(:question) { create(:question) }
   given!(:sub) { create(:subscription, user: user, question: question) }
