@@ -19,4 +19,10 @@ class Answer < ApplicationRecord
       update(best: true)
     end
   end
+
+  after_commit :notify, on: %i[create update]
+
+  def notify
+    NotificationJob.perform_later(self)
+  end
 end

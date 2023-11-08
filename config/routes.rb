@@ -1,7 +1,13 @@
 # frozen_string_literal: true
+require 'sidekiq/web'
 
 Rails.application.routes.draw do
   use_doorkeeper
+
+  authenticate :user, lambda { |u| u.admin? } do
+    mount Sidekiq::Web => '/sidekiq'
+  end
+
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
   devise_for :users, controllers: { omniauth_callbacks: 'oauth_callbacks' }
   root to: 'questions#index'
@@ -41,6 +47,8 @@ Rails.application.routes.draw do
       end
     end
   end
+
+  resource :subscription, only: [:create, :destroy]
 
   mount ActionCable.server => '/cable'
 end

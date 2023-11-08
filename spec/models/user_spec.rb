@@ -3,15 +3,16 @@
 require 'rails_helper'
 
 RSpec.describe User, type: :model do
-  it { should have_many(:questions).dependent(:destroy) }
-  it { should have_many(:answers).dependent(:destroy) }
-  it { should have_many(:votes).dependent(:destroy) }
-  it { should have_many(:comments).dependent(:nullify) }
-  it { should have_many(:authorizations).dependent(:destroy) }
+  it { is_expected.to have_many(:questions).dependent(:destroy) }
+  it { is_expected.to have_many(:answers).dependent(:destroy) }
+  it { is_expected.to have_many(:votes).dependent(:destroy) }
+  it { is_expected.to have_many(:comments).dependent(:nullify) }
+  it { is_expected.to have_many(:authorizations).dependent(:destroy) }
+  it { is_expected.to have_many(:subscriptions).dependent(:destroy) }
 
-  it { should validate_presence_of :email }
-  it { should validate_presence_of :password }
-  it { should have_many(:rewards) }
+  it { is_expected.to validate_presence_of :email }
+  it { is_expected.to validate_presence_of :password }
+  it { is_expected.to have_many(:rewards) }
 
   describe '.find_for_oauth' do
     let!(:user) { create(:user) }
