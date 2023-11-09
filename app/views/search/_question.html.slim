@@ -1,0 +1,11 @@
+div
+  h2
+    | Question: &nbsp
+    = link_to resource.title, question_path(resource)
+  p
+    | Body: &nbsp
+    = resource.body
+  p
+    | Author: &nbsp
+    = resource.user.email
+hr

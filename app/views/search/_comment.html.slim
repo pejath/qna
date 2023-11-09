@@ -1,0 +1,8 @@
+div
+  h2
+    | Comment:&nbsp
+    = commentable_source_link(resource)
+  p
+    | Author: &nbsp
+    = resource.user.email
+hr

@@ -1,0 +1,6 @@
+- if !@result.empty?
+  .search_results
+    - @result.each do |resource|
+      = render "search/#{resource.class.name.downcase}", resource: resource
+- else
+  p Nothing found
