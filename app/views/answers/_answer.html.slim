@@ -1,5 +1,5 @@
 li[id="answer-#{answer.id}"]
-  - if policy(answer).edit? && answer.persisted? && !answer.best
+  - if policy(answer.question).edit? && answer.persisted? && !answer.best
     = link_to 'Best', mark_the_best_answer_path(answer), method: :post, remote: true
   - if answer.best
     'Best answer:
@@ -7,7 +7,7 @@ li[id="answer-#{answer.id}"]
   div
     - if answer.files.attached?
       - answer.files.each do |file|
-        p.file-container
+        p.file-container id="file-id-#{file.id}"
           = link_to file.filename.to_s, url_for(file)
           - if policy(answer).destroy?
             = link_to 'delete file', purge_file_path(file), method: :delete, remote: true, class: 'delete-file-link'

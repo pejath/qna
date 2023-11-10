@@ -3,6 +3,7 @@
 //= require action_cable
 //= require turbolinks
 //= require skim
+//= require cocoon
 //= require gist-embed/dist/gist-embed.min
 //= require_tree .
 

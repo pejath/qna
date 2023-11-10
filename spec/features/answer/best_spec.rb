@@ -9,7 +9,7 @@ feature 'Author of question can choose the best answer', "
 " do
   given!(:user) { create(:user) }
   given!(:user_2) { create(:user) }
-  given!(:question) { create(:question, user: user) }
+  given!(:question) { create(:question, :with_reward, user: user) }
   given!(:answer) { create(:answer, question: question, user: user_2, body: 'Best answer') }
 
   describe 'Author of question', js: true do

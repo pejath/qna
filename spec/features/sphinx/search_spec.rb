@@ -8,12 +8,10 @@ feature 'User can search for answers, questions, comments and users', "
   I'd like to be able to search for the information
 " do
 
-  before do
-    create(:user)
-    question = create(:question)
-    create(:answer, body: 'something')
-    create(:comment, commentable: question)
-  end
+  given!(:user) { create(:user) }
+  given!(:question) { create(:question) }
+  given!(:answer) { create(:answer, body: 'something') }
+  given!(:comment) { create(:comment, commentable: question) }
 
   background { visit root_path }
 
@@ -61,7 +59,7 @@ feature 'User can search for answers, questions, comments and users', "
         click_on 'Search'
 
         within '.search_results' do
-          expect(page).to have_content 'user_1@test.com'
+          expect(page).to have_content user.email
         end
       end
     end

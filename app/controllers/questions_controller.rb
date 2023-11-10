@@ -16,7 +16,8 @@ class QuestionsController < ApplicationController
   end
 
   def show
-    @answer = @question.answers.new
+    @answers = @question.answers
+    @answer = Answer.new
     @answer.links.new
   end
 
@@ -73,6 +74,6 @@ class QuestionsController < ApplicationController
   end
 
   def question_params
-    params.require(:question).permit(:title, :body, :vote_action, files: [], links_attributes: %i[name url _destroy], reward_attributes: %i[title image])
+    params.require(:question).permit(:title, :body, :vote_action, files: [], links_attributes: %i[id name url _destroy], reward_attributes: %i[id title image _destroy])
   end
 end

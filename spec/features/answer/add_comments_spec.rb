@@ -7,12 +7,13 @@ feature 'Authenticated user can comment the answer', "
   As an authenticated user
   I'd like to be able to add comment
 " do
+
   given!(:user) { create(:user) }
   given!(:question) { create(:question) }
   given!(:answer) { create(:answer, question: question) }
 
-  context 'authenticated user', js: true do
-    scenario 'add comment' do
+  context 'authenticated user' do
+    scenario 'add comment', js: true do
       sign_in(user)
       visit question_path(question)
 

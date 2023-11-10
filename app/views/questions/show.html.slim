@@ -3,7 +3,7 @@
 div
   - if @question.files.attached?
     - @question.files.each do |file|
-      p.file-container
+      p.file-container id="file-id-#{file.id}"
         = link_to file.filename.to_s, url_for(file)
         - if policy(@question).destroy?
           = link_to 'delete file', purge_file_path(file), method: :delete, remote: true, class: 'delete-file-link'
@@ -23,10 +23,10 @@ div
   = f.label :files
   = f.file_field :files, multiple: true
   p Links:
-  p
+  #links
     = f.fields_for :links do |link|
-      = render "answers/link_fields", f: link
-      .links
+      = render "link_fields", f: link
+    .links
       = link_to_add_association 'add link', f, :links
   = f.submit 'Answer'
 .answers

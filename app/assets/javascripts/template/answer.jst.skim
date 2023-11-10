@@ -3,7 +3,7 @@ div[id="answer-#{@answer.id}"]
 
   .rating
     'Rating:
-      '0
+      0
   - if gon.user_id && (@answer.user_id != gon.user_id)
     div class='vote-container'
         a data-remote="true" rel="nofollow" data-method="post" href="/answers/#{@answer.id}/like" ↑
