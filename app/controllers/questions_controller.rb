@@ -4,65 +4,72 @@ class QuestionsController < ApplicationController
   include Voted
   include Commented
 
+  before_action :authenticate_user!, except: %i[index show]
+
+  before_action :set_question, only: %i[ show edit update destroy ]
   before_action :gon_question_id, only: :show
   before_action :gon_question_user_id, only: :show
-  before_action :authenticate_user!, except: %i[index show]
   after_action :publish_question, only: :create
 
-  expose :questions, -> { Question.all }
-  expose :question
-
-  expose :answers, from: :question
-  expose :answer, -> { Answer.new }
-
-  def destroy
-    authorize(question)
-
-    question.destroy
-
-    redirect_to questions_path
-  end
-
-  def update
-    authorize(question)
-    question.update(question_params)
+  def index
+    @questions = Question.all
   end
 
   def show
-    answer.links.new
+    @answer = @question.answers.new
+    @answer.links.new
   end
 
-  def create
-    question.user = current_user
-    authorize(question)
+  def new
+    @question = Question.new
+    @question.links.new
+    @question.reward = Reward.new
+  end
 
-    if question.save
-      redirect_to question, notice: 'Your question successfully created.'
+  def edit; end
+
+  def create
+    @question = Question.new(question_params)
+    @question.user = current_user
+
+    if @question.save
+      redirect_to @question, notice: 'Your question successfully created.'
     else
       render :new
     end
   end
 
-  def new
-    question.links.new
-    reward = Reward.new
-    question.reward = reward
+  def update
+    authorize(@question)
+    @question.update(question_params)
+  end
+
+  def destroy
+    authorize(@question)
+
+    @question.destroy
+
+    redirect_to questions_path
   end
 
   private
 
+  def set_question
+    @question = Question.with_attached_files.find(params[:id])
+  end
+
   def gon_question_id
-    gon.question_id = question.id
+    gon.question_id = @question.id
   end
 
   def gon_question_user_id
-    gon.question_user_id = question.user_id
+    gon.question_user_id = @question.user_id
   end
 
   def publish_question
-    return if question.errors.any?
+    return if @question.errors.any?
 
-    ActionCable.server.broadcast 'questions', question
+    ActionCable.server.broadcast 'questions', @question
   end
 
   def question_params
