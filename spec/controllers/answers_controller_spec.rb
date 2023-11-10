@@ -26,7 +26,7 @@ RSpec.describe AnswersController, type: :controller do
 
       it 'saves a answer with correct association' do
         http_request
-        expect(assigns(:exposed_answer).question_id).to eq question.id
+        expect(assigns(:answer).question_id).to eq question.id
       end
     end
 

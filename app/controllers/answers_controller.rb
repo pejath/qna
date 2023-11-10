@@ -5,39 +5,47 @@ class AnswersController < ApplicationController
   include Commented
 
   before_action :authenticate_user!
+
+  before_action :set_answer, only: [:update, :destroy, :mark_the_best]
   after_action :publish_answer, only: :create
 
-  expose :question
-  expose :answer
-
   def create
-    answer.question = question
-    answer.user_id = current_user.id
-    answer.save
+    @answer = Answer.new(answer_params)
+    @answer.question = question
+    @answer.user_id = current_user.id
+    @answer.save
   end
 
   def update
-    @answers = answer.question.answers
-    answer.update(answer_params)
+    @answers = @answer.question.answers
+    @answer.update(answer_params)
   end
 
   def destroy
-    @answers = answer.question.answers
-    answer.destroy
+    @answers = @answer.question.answers
+    @answer.destroy
   end
 
   def mark_the_best
-    answer.mark_the_best
-    question.reward.user = answer.user
-    question.reward.save
+    @answer.mark_the_best
+    @answer.question.reward.user = @answer.user
+    @answer.question.reward.save
   end
 
   private
 
-  def publish_answer
-    return if answer.errors.any?
+  def set_answer
+    @answer = Answer.find(params[:id])
+  end
 
-    ActionCable.server.broadcast "question_#{question.id}_answers", answer
+  def question
+    @question ||= Question.find(params[:question_id])
+  end
+
+  def publish_answer
+    return if @answer.errors.any?
+
+    ActionCable.server.broadcast "question_#{@answer.question.id}_answers", @answer
   end
 
   def answer_params
