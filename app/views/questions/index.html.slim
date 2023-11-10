@@ -1,7 +1,7 @@
 h1
   | Question's list
 .questions-list
-  - questions.each do |q|
+  - @questions.each do |q|
     p
       = link_to q.title, q
 p

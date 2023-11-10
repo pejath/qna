@@ -1,23 +1,23 @@
-.question[id="question-#{question.id}"]
-  = render question
+.question[id="question-#{@question.id}"]
+  = render @question
 div
-  - if question.files.attached?
-    - question.files.each do |file|
+  - if @question.files.attached?
+    - @question.files.each do |file|
       p.file-container
         = link_to file.filename.to_s, url_for(file)
-        - if policy(question).destroy?
+        - if policy(@question).destroy?
           = link_to 'delete file', purge_file_path(file), method: :delete, remote: true, class: 'delete-file-link'
 .links
   p Links:
   ul
-    - question.links.sort_by { |a| a.is_gist? ? 1 : 0 }.each do |link|
+    - @question.links.sort_by { |a| a.is_gist? ? 1 : 0 }.each do |link|
       - if link.is_gist?
         code data-gist-id="#{link.gist_id}"
       - else
         li= link_to link.name, link.url
 
 .answer-errors
-= form_with model: [question, answer], local: false, class: 'new-answer' do |f|
+= form_with model: [@question, @answer], local: false, class: 'new-answer' do |f|
   = f.label :body, 'Your answer'
   = f.text_area :body
   = f.label :files
