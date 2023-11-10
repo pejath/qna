@@ -9,19 +9,19 @@ feature 'User can add links to question', "
 " do
   given(:user) { create(:user) }
   given(:question) { create(:question) }
-  given(:gist_url) { 'https://gist.github.com' }
+  given(:google_url) { 'https://google.com' }
 
   scenario 'User adds link when adds answer' do
     sign_in(user)
-    visit question_path(:question)
+    visit question_path(question)
 
     fill_in 'answer[body]', with: 'Test question'
 
-    fill_in 'Link name', with: 'Answer gist'
-    fill_in 'Url', with: gist_url
+    fill_in 'answer[links_attributes][0][name]', with: 'Google'
+    fill_in 'answer[links_attributes][0][url]', with: google_url
 
     click_on 'Answer'
 
-    expect(page).to have_link 'Answer gist', href: gist_url
+    expect(page).to have_link 'Google', href: google_url
   end
 end

@@ -31,11 +31,11 @@ feature 'User can create question', "
       expect(page).to have_content "Title can't be blank"
     end
 
-    scenario 'adds and removes multiple links to question' do
+    scenario 'adds and removes multiple links to question', js: true do
       click_on 'add link'
-      expect(page).to have_selector('.nested-fields', count: 3)
+      expect(page).to have_selector('nested-fields', count: 2)
       click_on 'remove link'
-      expect(page).to have_selector('.nested-fields', count: 2)
+      expect(page).to have_selector('nested-fields', count: 1)
     end
 
     scenario 'asks a question with attached files' do

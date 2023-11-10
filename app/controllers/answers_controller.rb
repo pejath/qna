@@ -28,8 +28,10 @@ class AnswersController < ApplicationController
 
   def mark_the_best
     @answer.mark_the_best
-    @answer.question.reward.user = @answer.user
-    @answer.question.reward.save
+    if @answer.question.reward
+      @answer.question.reward.user = @answer.user
+      @answer.question.reward.save
+    end
   end
 
   private
@@ -49,6 +51,6 @@ class AnswersController < ApplicationController
   end
 
   def answer_params
-    params.require(:answer).permit(:body, :vote_action, files: [], links_attributes: %i[name url _destroy])
+    params.require(:answer).permit(:body, :vote_action, files: [], links_attributes: %i[id name url _destroy])
   end
 end

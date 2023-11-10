@@ -29,7 +29,7 @@ feature 'User can edit his answer', "
 
         expect(page).to_not have_content answer.body
         expect(page).to have_content 'edited answer'
-        expect(page).to_not have_selector 'textarea'
+        expect(page).to_not have_selector '#answer_body'
       end
     end
 

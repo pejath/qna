@@ -15,7 +15,7 @@ gem 'puma', '~> 5.0'
 gem 'sass-rails', '>= 6'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'cocoon'
-gem 'decent_exposure', '~> 3.0'
+# gem 'decent_exposure', '~> 3.0'
 gem 'devise'
 gem 'gon'
 gem 'jbuilder', '~> 2.7'
