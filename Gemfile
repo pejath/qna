@@ -25,6 +25,7 @@ gem 'pry'
 gem 'skim'
 gem 'slim-rails'
 gem 'turbolinks', '~> 5.2.0'
+gem 'mini_racer'
 
 gem 'mysql2', '~> 0.4'
 gem 'pundit', '~> 2.3'

@@ -174,6 +174,7 @@ GEM
       addressable (~> 2.8)
     letter_opener (1.8.1)
       launchy (>= 2.2, < 3)
+    libv8-node (16.19.0.1)
     listen (3.8.0)
       rb-fsevent (~> 0.10, >= 0.10.3)
       rb-inotify (~> 0.9, >= 0.9.10)
@@ -192,6 +193,8 @@ GEM
     middleware (0.1.0)
     mini_mime (1.1.5)
     mini_portile2 (2.8.4)
+    mini_racer (0.6.4)
+      libv8-node (~> 16.19.0.0)
     minitest (5.19.0)
     msgpack (1.7.2)
     multi_json (1.15.0)
@@ -443,6 +446,7 @@ DEPENDENCIES
   letter_opener
   listen (~> 3.3)
   localhost
+  mini_racer
   mysql2 (~> 0.4)
   net-http
   oj
