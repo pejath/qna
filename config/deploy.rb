@@ -1,14 +1,16 @@
-# config valid for current version and patch releases of Capistrano
-lock "~> 3.18.0"
+# frozen_string_literal: true
 
-set :application, "qna"
-set :repo_url, "git@github.com:pejath/qna.git"
+# config valid for current version and patch releases of Capistrano
+lock '~> 3.18.0'
+
+set :application, 'qna'
+set :repo_url, 'git@github.com:pejath/qna.git'
 
 # Default branch is :master
 # ask :branch, `git rev-parse --abbrev-ref HEAD`.chomp
 
 # Default deploy_to directory is /var/www/my_app_name
-set :deploy_to, "/home/deployer/qna"
+set :deploy_to, '/home/deployer/qna'
 set :deploy_user, 'deployer'
 
 # Default value for :format is :airbrussh.
@@ -22,10 +24,10 @@ set :deploy_user, 'deployer'
 # set :pty, true
 
 # Default value for :linked_files is []
-append :linked_files, "config/database.yml", 'config/master.key'
+append :linked_files, 'config/database.yml', 'config/master.key'
 
 # Default value for linked_dirs is []
-append :linked_dirs, "log", "tmp/pids", "tmp/cache", "tmp/sockets", "public/system", "vendor", "storage"
+append :linked_dirs, 'log', 'tmp/pids', 'tmp/cache', 'tmp/sockets', 'public/system', 'vendor', 'storage'
 
 # Default value for default_env is {}
 # set :default_env, { path: "/opt/ruby/bin:$PATH" }
@@ -38,7 +40,6 @@ append :linked_dirs, "log", "tmp/pids", "tmp/cache", "tmp/sockets", "public/syst
 
 # Uncomment the following to require manually verifying the host key before first deploy.
 # set :ssh_options, verify_host_key: :secure
-
 
 set :pty, false
 

@@ -9,7 +9,7 @@ feature 'Author of the question or the answer can delete attached files', "
 " do
   given!(:author) { create :user }
   given!(:question) { create :question, :with_file, user: author }
-  given!(:answer) { create :answer, :with_file, user: author, question: question }
+  given!(:answer) { create :answer, :with_file, user: author, question: }
 
   describe 'Author' do
     background do

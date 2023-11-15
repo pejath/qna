@@ -9,7 +9,7 @@ feature 'Author can destroy answer', "
 " do
   given!(:author) { create(:user) }
   given!(:question) { create(:question) }
-  given!(:answer) { create(:answer, question: question, user_id: author.id) }
+  given!(:answer) { create(:answer, question:, user_id: author.id) }
 
   scenario 'author tries to destroy the answer', js: true do
     sign_in(author)

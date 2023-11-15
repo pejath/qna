@@ -4,7 +4,7 @@ require 'rails_helper'
 
 RSpec.describe QuestionsController, type: :controller do
   let(:user) { create(:user) }
-  let(:question) { create(:question, user: user) }
+  let(:question) { create(:question, user:) }
 
   it_behaves_like 'POST #vote', :question
   it_behaves_like 'POST #add_comment', :question
@@ -58,7 +58,9 @@ RSpec.describe QuestionsController, type: :controller do
 
     context 'with invalid attributes' do
       it "doesn't save a new question in the database" do
-        expect { post :create, params: { question: attributes_for(:question, :invalid) } }.not_to change(Question, :count)
+        expect do
+          post :create, params: { question: attributes_for(:question, :invalid) }
+        end.not_to change(Question, :count)
       end
 
       it 're-render new' do
@@ -108,7 +110,7 @@ RSpec.describe QuestionsController, type: :controller do
   describe 'DELETE #destroy' do
     before { login(user) }
 
-    let!(:question) { create(:question, user: user) }
+    let!(:question) { create(:question, user:) }
 
     it 'deletes the question' do
       expect { delete :destroy, params: { id: question } }.to change(Question, :count).by(-1)

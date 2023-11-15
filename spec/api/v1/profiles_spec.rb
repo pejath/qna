@@ -17,7 +17,7 @@ describe 'Profiles API', type: :request do
     context 'authorized' do
       let(:me) { create(:user) }
       let(:access_token) { create(:access_token, resource_owner_id: me.id) }
-      before { get '/api/v1/profiles/me', params: { access_token: access_token.token }, headers: headers }
+      before { get '/api/v1/profiles/me', params: { access_token: access_token.token }, headers: }
 
       it 'returns that response successful' do
         expect(response).to be_successful
@@ -47,7 +47,7 @@ describe 'Profiles API', type: :request do
       let(:access_token) { create(:access_token, resource_owner_id: me.id) }
       let!(:users) { create_list(:user, 3) }
 
-      before { get '/api/v1/profiles', params: { access_token: access_token.token }, headers: headers }
+      before { get '/api/v1/profiles', params: { access_token: access_token.token }, headers: }
 
       it 'returns that response successful' do
         expect(response).to be_successful

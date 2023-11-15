@@ -9,7 +9,7 @@ feature 'User can unsubscribe from question', "
 " do
   given!(:user) { create(:user) }
   given!(:question) { create(:question) }
-  given!(:sub) { create(:subscription, user: user, question: question) }
+  given!(:sub) { create(:subscription, user:, question:) }
 
   describe 'Authenticated user', js: true do
     scenario 'user unsubscribes' do

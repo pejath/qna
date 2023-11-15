@@ -5,11 +5,11 @@ require 'rails_helper'
 RSpec.describe NotificationService do
   let!(:users) { create_list(:user, 3) }
   let!(:question) { create(:question) }
-  let!(:answer) { create(:answer, question: question) }
+  let!(:answer) { create(:answer, question:) }
 
   before do
     users.each do |user|
-      create(:subscription, user: user, question: question)
+      create(:subscription, user:, question:)
     end
   end
 

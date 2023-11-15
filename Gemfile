@@ -3,7 +3,7 @@
 source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
-ruby '2.7.7'
+ruby '3.2.2'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails', branch: 'main'
 gem 'rails', '~> 6.1.7', '>= 6.1.7.4'
@@ -20,12 +20,12 @@ gem 'devise'
 gem 'gon'
 gem 'jbuilder', '~> 2.7'
 gem 'jquery-rails', '~> 4.6'
+gem 'mini_racer'
 gem 'net-http'
 gem 'pry'
 gem 'skim'
 gem 'slim-rails'
 gem 'turbolinks', '~> 5.2.0'
-gem 'mini_racer'
 
 gem 'mysql2', '~> 0.4'
 gem 'pundit', '~> 2.3'
@@ -47,8 +47,8 @@ gem 'omniauth-vkontakte'
 gem 'sprockets', '~> 4'
 gem 'sprockets-rails', require: 'sprockets/railtie'
 
-gem 'ed25519', '>= 1.2', '< 2.0'
 gem 'bcrypt_pbkdf', '>= 1.0', '< 2.0'
+gem 'ed25519', '>= 1.2', '< 2.0'
 
 # Use Redis adapter to run Action Cable in production
 # gem 'redis', '~> 4.0'
@@ -68,9 +68,9 @@ group :development, :test do
 
   gem 'capistrano', require: false
   gem 'capistrano-bundler', require: false
+  gem 'capistrano-passenger', require: false
   gem 'capistrano-rails', require: false
   gem 'capistrano-rvm', require: false
-  gem 'capistrano-passenger', require: false
 end
 
 group :development do
@@ -94,7 +94,7 @@ end
 group :test do
   # Adds support for Capybara system testing and selenium driver
   gem 'capybara', '>= 3.26'
-  gem 'selenium-webdriver', '>= 4.0.0.rc1'
+  gem 'selenium-webdriver', '~> 4.11'
   # Easy installation and use of web drivers to run system tests with browsers
   gem 'capybara-email'
   gem 'database_cleaner-active_record'

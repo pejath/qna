@@ -4,11 +4,11 @@ class SubscriptionsController < ApplicationController
   before_action :authenticate_user!
 
   def create
-    current_user.subscriptions.create(question: question)
+    current_user.subscriptions.create(question:)
   end
 
   def destroy
-    current_user.subscriptions.find_by(question: question)&.destroy
+    current_user.subscriptions.find_by(question:)&.destroy
   end
 
   private

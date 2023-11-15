@@ -9,8 +9,8 @@ feature 'Author of question can choose the best answer', "
 " do
   given!(:user) { create(:user) }
   given!(:user_2) { create(:user) }
-  given!(:question) { create(:question, :with_reward, user: user) }
-  given!(:answer) { create(:answer, question: question, user: user_2, body: 'Best answer') }
+  given!(:question) { create(:question, :with_reward, user:) }
+  given!(:answer) { create(:answer, question:, user: user_2, body: 'Best answer') }
 
   describe 'Author of question', js: true do
     background do
@@ -25,7 +25,7 @@ feature 'Author of question can choose the best answer', "
     end
 
     scenario 'can choose other answer as the best' do
-      create(:answer, question: question, user: user_2, best: true, body: 'The best answer')
+      create(:answer, question:, user: user_2, best: true, body: 'The best answer')
 
       click_on 'Best'
 

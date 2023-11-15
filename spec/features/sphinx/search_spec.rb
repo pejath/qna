@@ -7,7 +7,6 @@ feature 'User can search for answers, questions, comments and users', "
   As a User
   I'd like to be able to search for the information
 " do
-
   given!(:user) { create(:user) }
   given!(:question) { create(:question) }
   given!(:answer) { create(:answer, body: 'something') }

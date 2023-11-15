@@ -6,7 +6,7 @@ class AnswersController < ApplicationController
 
   before_action :authenticate_user!
 
-  before_action :set_answer, only: [:update, :destroy, :mark_the_best]
+  before_action :set_answer, only: %i[update destroy mark_the_best]
   after_action :publish_answer, only: :create
 
   def create
@@ -28,10 +28,10 @@ class AnswersController < ApplicationController
 
   def mark_the_best
     @answer.mark_the_best
-    if @answer.question.reward
-      @answer.question.reward.user = @answer.user
-      @answer.question.reward.save
-    end
+    return unless @answer.question.reward
+
+    @answer.question.reward.user = @answer.user
+    @answer.question.reward.save
   end
 
   private

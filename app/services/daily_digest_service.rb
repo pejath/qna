@@ -2,10 +2,10 @@
 
 class DailyDigestService
   def send_digest
-    if any_last_questions?
-      User.find_each(batch_size: 500) do |user|
-        DailyDigestMailer.digest(user).deliver_later
-      end
+    return unless any_last_questions?
+
+    User.find_each(batch_size: 500) do |user|
+      DailyDigestMailer.digest(user).deliver_later
     end
   end
 

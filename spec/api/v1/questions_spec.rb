@@ -18,9 +18,9 @@ describe 'Questions API', type: :request do
       let!(:questions) { create_list(:question, 2) }
       let(:question) { questions.first }
       let(:question_response) { json['questions'].first }
-      let!(:answers) { create_list(:answer, 3, question: question) }
+      let!(:answers) { create_list(:answer, 3, question:) }
 
-      before { get '/api/v1/questions', params: { access_token: access_token.token }, headers: headers }
+      before { get '/api/v1/questions', params: { access_token: access_token.token }, headers: }
 
       it 'returns that response successful' do
         expect(response).to be_successful
@@ -71,7 +71,7 @@ describe 'Questions API', type: :request do
       let(:access_token) { create(:access_token) }
       let!(:question) { create(:question, :with_file, :with_link, :with_comments) }
       let(:response_question) { json['question'] }
-      before { get "/api/v1/questions/#{question.id}", params: { access_token: access_token.token }, headers: headers }
+      before { get "/api/v1/questions/#{question.id}", params: { access_token: access_token.token }, headers: }
 
       it 'returns that response successful' do
         expect(response).to be_successful
@@ -139,7 +139,9 @@ describe 'Questions API', type: :request do
       let!(:question) { attributes_for(:question) }
       let(:access_token) { create(:access_token, resource_owner_id: me.id) }
 
-      before { post '/api/v1/questions', params: { access_token: access_token.token, question: question }, headers: headers }
+      before do
+        post '/api/v1/questions', params: { access_token: access_token.token, question: }, headers:
+      end
 
       it 'returns that response successful' do
         expect(response).to be_successful
@@ -174,7 +176,7 @@ describe 'Questions API', type: :request do
       let(:me) { create(:user) }
       let!(:question) { create(:question, user: me) }
       let(:access_token) { create(:access_token, resource_owner_id: me.id) }
-      let(:http_request) { patch "/api/v1/questions/#{question.id}", params: params, headers: headers }
+      let(:http_request) { patch "/api/v1/questions/#{question.id}", params:, headers: }
 
       let(:params) { { access_token: access_token.token, question: { body: 'new body' } } }
 
@@ -218,7 +220,9 @@ describe 'Questions API', type: :request do
       let!(:question) { create(:question, user: me) }
       let(:access_token) { create(:access_token, resource_owner_id: me.id) }
 
-      let(:http_request) { delete "/api/v1/questions/#{question.id}", params: { access_token: access_token.token }, headers: headers }
+      let(:http_request) do
+        delete "/api/v1/questions/#{question.id}", params: { access_token: access_token.token }, headers:
+      end
 
       it 'returns that response successful' do
         http_request

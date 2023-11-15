@@ -8,15 +8,15 @@ module VoteConcern
   end
 
   def upvote(user)
-    votes.find_or_create_by(user: user, value: true)
+    votes.find_or_create_by(user:, value: true)
   end
 
   def downvote(user)
-    votes.find_or_create_by(user: user, value: false)
+    votes.find_or_create_by(user:, value: false)
   end
 
   def remove_vote(user)
-    votes.delete_by(user: user)
+    votes.delete_by(user:)
   end
 
   def rating

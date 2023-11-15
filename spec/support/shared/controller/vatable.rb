@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 shared_examples_for 'POST #vote' do |desc_class|
-  subject(:http_request) { post :vote, params: params, format: :json }
+  subject(:http_request) { post :vote, params:, format: :json }
   let(:author) { create(:user) }
   let(:resource) { create(desc_class, user: author) }
 
@@ -59,7 +59,7 @@ shared_examples_for 'POST #vote' do |desc_class|
 
   describe 'unvote action' do
     let(:params) { { id: resource.id, vote_action: 'unvote' } }
-    let!(:vote) { create(:vote, user: user, votable: resource) }
+    let!(:vote) { create(:vote, user:, votable: resource) }
 
     context 'unauthenticated user' do
       it "can not unvote the #{desc_class}" do

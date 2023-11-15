@@ -4,7 +4,7 @@ require 'rails_helper'
 
 RSpec.describe UsersController, type: :controller do
   let(:session) { { oauth: { 'provider' => 'vkontakte', 'uid' => '123' } } }
-  subject(:http_request) { post :set_email, params: params, session: session }
+  subject(:http_request) { post :set_email, params:, session: }
 
   describe 'POST #set_email' do
     context 'without oauth params' do

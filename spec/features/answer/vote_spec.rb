@@ -10,7 +10,7 @@ feature 'User can upvote an answer', "
   given!(:author) { create(:user) }
   given!(:user) { create(:user) }
   given!(:question) { create(:question) }
-  given!(:answer) { create(:answer, question: question, user: author) }
+  given!(:answer) { create(:answer, question:, user: author) }
 
   scenario 'Unauthenticated user can not upvote' do
     visit question_path(question)

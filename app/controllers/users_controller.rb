@@ -5,7 +5,7 @@ class UsersController < ApplicationController
     return redirect_to root_path unless session[:oauth]
 
     password = Devise.friendly_token[0, 20]
-    @user = User.new(email: user_params[:email], password: password, password_confirmation: password)
+    @user = User.new(email: user_params[:email], password:, password_confirmation: password)
     if @user.save
       @user.create_autorization(oauth)
       redirect_to root_path

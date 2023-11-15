@@ -13,11 +13,11 @@ RSpec.describe QuestionPolicy do
     end
 
     it 'grant access if user is author' do
-      expect(subject).to permit(user, create(:question, user: user))
+      expect(subject).to permit(user, create(:question, user:))
     end
 
     it 'denies access if user is not author' do
-      expect(subject).not_to permit(User.new, create(:question, user: user))
+      expect(subject).not_to permit(User.new, create(:question, user:))
     end
   end
 end

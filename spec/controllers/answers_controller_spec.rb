@@ -10,11 +10,11 @@ RSpec.describe AnswersController, type: :controller do
   it_behaves_like 'POST #add_comment', :answer
 
   describe 'POST #create' do
-    subject(:http_request) { post :create, params: params, format: :js }
+    subject(:http_request) { post :create, params:, format: :js }
     before { sign_in(user) }
 
     context 'with valid attributes' do
-      let(:params) { { answer: attributes_for(:answer, question: question), question_id: question.id } }
+      let(:params) { { answer: attributes_for(:answer, question:), question_id: question.id } }
 
       it 'saves a new answer in the database' do
         expect { http_request }.to change(Answer, :count).by(1)
@@ -31,7 +31,7 @@ RSpec.describe AnswersController, type: :controller do
     end
 
     context 'with invalid attributes' do
-      let(:params) { { question_id: question, answer: attributes_for(:answer, :invalid, question: question) } }
+      let(:params) { { question_id: question, answer: attributes_for(:answer, :invalid, question:) } }
 
       it "doesn't save a new question in the database" do
         expect { http_request }.not_to change(Answer, :count)
@@ -44,8 +44,8 @@ RSpec.describe AnswersController, type: :controller do
   end
 
   describe 'PATCH #upadte' do
-    subject(:http_request) { patch :update, params: params, format: :js }
-    let!(:answer) { create(:answer, question: question) }
+    subject(:http_request) { patch :update, params:, format: :js }
+    let!(:answer) { create(:answer, question:) }
     before { sign_in(user) }
 
     context 'with valid attributes' do

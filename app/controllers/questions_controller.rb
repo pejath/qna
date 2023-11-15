@@ -6,7 +6,7 @@ class QuestionsController < ApplicationController
 
   before_action :authenticate_user!, except: %i[index show]
 
-  before_action :set_question, only: %i[ show edit update destroy ]
+  before_action :set_question, only: %i[show edit update destroy]
   before_action :gon_question_id, only: :show
   before_action :gon_question_user_id, only: :show
   after_action :publish_question, only: :create
@@ -74,6 +74,7 @@ class QuestionsController < ApplicationController
   end
 
   def question_params
-    params.require(:question).permit(:title, :body, :vote_action, files: [], links_attributes: %i[id name url _destroy], reward_attributes: %i[id title image _destroy])
+    params.require(:question).permit(:title, :body, :vote_action, files: [],
+                                                                  links_attributes: %i[id name url _destroy], reward_attributes: %i[id title image _destroy])
   end
 end

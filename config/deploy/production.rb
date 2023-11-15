@@ -1,14 +1,15 @@
+# frozen_string_literal: true
+
 # server-based syntax
 # ======================
 # Defines a single server with a list of roles and multiple properties.
 # You can define all roles on a single server, or split them:
 
-server "213.189.201.16", user: "deployer", roles: %w{app db web}, primary: :true
+server '213.189.201.16', user: 'deployer', roles: %w[app db web], primary: true
 # server "example.com", user: "deploy", roles: %w{app web}, other_property: :other_value
 # server "db.example.com", user: "deploy", roles: %w{db}
 
 set :rails_env, :production
-
 
 # role-based syntax
 # ==================
@@ -22,8 +23,6 @@ set :rails_env, :production
 # role :web, %w{user1@primary.com user2@additional.com}, other_property: :other_value
 # role :db,  %w{deploy@example.com}
 
-
-
 # Configuration
 # =============
 # You can set any configuration variable like in config/deploy.rb
@@ -31,8 +30,6 @@ set :rails_env, :production
 # For available Capistrano configuration variables see the documentation page.
 # http://capistranorb.com/documentation/getting-started/configuration/
 # Feel free to add new variables to customise your setup.
-
-
 
 # Custom SSH Options
 # ==================
@@ -42,12 +39,12 @@ set :rails_env, :production
 #
 # Global options
 # --------------
- set :ssh_options, {
-   keys: %w(/home/pejath/.ssh/id_rsa),
-   forward_agent: true,
-   auth_methods: %w(publickey password),
-   port: 2222
- }
+set :ssh_options, {
+  keys: %w[/home/pejath/.ssh/id_rsa],
+  forward_agent: true,
+  auth_methods: %w[publickey password],
+  port: 2222
+}
 #
 # The server-based syntax can be used to override options:
 # ------------------------------------

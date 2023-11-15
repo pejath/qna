@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 shared_examples_for 'POST #add_comment' do |desc_class|
-  subject(:http_request) { post :add_comment, params: params, format: :js }
+  subject(:http_request) { post :add_comment, params:, format: :js }
 
   let!(:resource) { create(desc_class) }
 
