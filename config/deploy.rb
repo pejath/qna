@@ -43,4 +43,6 @@ append :linked_dirs, 'log', 'tmp/pids', 'tmp/cache', 'tmp/sockets', 'public/syst
 
 set :pty, false
 
-after 'deploy:publishing', 'unicorn:restart'
+set :sidekiq_roles, [:app]
+
+# after 'deploy:publishing', 'unicorn:restart'

@@ -50,6 +50,9 @@ gem 'sprockets-rails', require: 'sprockets/railtie'
 gem 'bcrypt_pbkdf', '>= 1.0', '< 2.0'
 gem 'ed25519', '>= 1.2', '< 2.0'
 
+
+gem 'redis-rails'
+
 # Use Redis adapter to run Action Cable in production
 # gem 'redis', '~> 4.0'
 # Use Active Model has_secure_password
@@ -65,12 +68,14 @@ group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: %i[mri mingw x64_mingw]
   gem 'rspec-rails', '~> 6.0.0'
+  gem 'base64', '~> 0.1.1'
 
   gem 'capistrano', require: false
   gem 'capistrano-bundler', require: false
   gem 'capistrano-passenger', require: false
   gem 'capistrano-rails', require: false
   gem 'capistrano-rvm', require: false
+  gem 'capistrano-sidekiq', require: false
 end
 
 group :development do

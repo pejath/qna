@@ -272,11 +272,13 @@ Devise.setup do |config|
   # Add a new OmniAuth provider. Check the wiki for more information on setting
   # up on your models and hooks.
   # config.omniauth :github, 'APP_ID', 'APP_SECRET', scope: 'user,public_repo'
-  config.omniauth :github, ENV['GITHUB_CLIENT_ID'], ENV['GITHUB_CLIENT_SECRET'], scope: 'user:email, read:user'
+  config.omniauth :github,
+                  Rails.application.credentials[Rails.env.to_sym][:github][:app_id],
+                  Rails.application.credentials[Rails.env.to_sym][:github][:app_secret], scope: 'user:email, read:user'
 
   config.omniauth :vkontakte,
-                  ENV['VK_APP_ID'],
-                  ENV['Vk_CLIENT_SECRET'],
+                  Rails.application.credentials[Rails.env.to_sym][:vk][:app_id],
+                  Rails.application.credentials[Rails.env.to_sym][:vk][:app_secret],
                   scope: 'user:email, read:user',
                   display: 'page',
                   lang: 'en',
