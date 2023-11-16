@@ -46,3 +46,13 @@ set :pty, false
 set :sidekiq_roles, [:app]
 
 # after 'deploy:publishing', 'unicorn:restart'
+after :deploy, "deploy:sidekiq_restart"
+
+namespace :deploy do
+  desc 'Sidekiq restart'
+  task :sidekiq_restart do
+    on roles(:app) do
+      execute :sudo, :systemctl, :restart, :sidekiq
+    end
+  end
+end
