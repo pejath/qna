@@ -5,7 +5,7 @@ lock '~> 3.18.0'
 
 set :application, 'qna'
 set :repo_url, 'git@github.com:pejath/qna.git'
-
+set :branch, 'deploy'
 # Default branch is :master
 # ask :branch, `git rev-parse --abbrev-ref HEAD`.chomp
 
