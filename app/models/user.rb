@@ -15,6 +15,8 @@ class User < ApplicationRecord
   has_many :authorizations, dependent: :destroy
   has_many :subscriptions, dependent: :destroy
 
+  after_create :user_confirm
+
   def self.find_for_oauth(auth)
     FindForOauthService.new(auth).call
   end
@@ -25,5 +27,11 @@ class User < ApplicationRecord
 
   def voted?(resource)
     votes.where(votable_id: resource).present?
+  end
+
+  def user_confirm
+    self.skip_confirmation!
+    self.confirm
+    self.save!
   end
 end
