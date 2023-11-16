@@ -46,6 +46,7 @@ set :pty, false
 set :sidekiq_roles, [:app]
 
 # after 'deploy:publishing', 'unicorn:restart'
+before 'thinking_sphinx:start', 'thinking_sphinx:configure'
 after :deploy, "deploy:sidekiq_restart"
 after :deploy, "thinking_sphinx:start"
 
