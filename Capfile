@@ -10,7 +10,6 @@ require "capistrano/bundler"
 require "capistrano/rails"
 # require "capistrano/passenger"
 require 'capistrano/sidekiq'
-install_plugin Capistrano::Sidekiq
 require "thinking_sphinx/capistrano"
 require "whenever/capistrano"
 
