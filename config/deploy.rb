@@ -47,6 +47,7 @@ set :sidekiq_roles, [:app]
 
 # after 'deploy:publishing', 'unicorn:restart'
 after :deploy, "deploy:sidekiq_restart"
+after :deploy, "thinking_sphinx:start"
 
 namespace :deploy do
   desc 'Sidekiq restart'
