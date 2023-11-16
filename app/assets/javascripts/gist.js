@@ -1,3 +1,3 @@
 $(document).on('turbolinks:load', function (){
-    window.GistEmbed.init();
+    // window.GistEmbed.init();
 });
