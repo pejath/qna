@@ -37,3 +37,4 @@
 /config/*.sphinx.conf
 /db/sphinx/
 /spec/examples.txt
+/dump.rdb
