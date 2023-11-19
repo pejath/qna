@@ -45,9 +45,11 @@ set :pty, false
 
 set :sidekiq_roles, [:app]
 
-# after 'deploy:publishing', 'unicorn:restart'
-before 'thinking_sphinx:start', 'thinking_sphinx:configure'
+after 'deploy:publishing', 'unicorn:restart'
 after :deploy, "deploy:sidekiq_restart"
+after :deploy, "thinking_sphinx:configure"
+after :deploy, "thinking_sphinx:index"
+after :deploy, "thinking_sphinx:stop"
 after :deploy, "thinking_sphinx:start"
 
 namespace :deploy do

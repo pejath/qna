@@ -50,6 +50,7 @@ gem 'sprockets-rails', require: 'sprockets/railtie'
 gem 'bcrypt_pbkdf', '>= 1.0', '< 2.0'
 gem 'ed25519', '>= 1.2', '< 2.0'
 
+gem 'unicorn'
 
 gem 'redis', '~> 4.0'
 gem 'redis-rails'
@@ -76,6 +77,7 @@ group :development, :test do
   gem 'capistrano-rails', require: false
   gem 'capistrano-rvm', require: false
   gem 'capistrano-sidekiq', require: false
+  gem 'capistrano3-unicorn', require: false
 end
 
 group :development do
