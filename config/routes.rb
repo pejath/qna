@@ -6,9 +6,9 @@ Rails.application.routes.draw do
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
   use_doorkeeper
 
-  authenticate :user, ->(u) { u.admin? } do
+  # authenticate :user, ->(u) { u.admin? } do
     mount Sidekiq::Web => '/sidekiq'
-  end
+  # end
 
   devise_for :users, controllers: { omniauth_callbacks: 'oauth_callbacks' }
   root to: 'questions#index'
