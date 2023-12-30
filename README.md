@@ -1,3 +1,4 @@
+[![Codecov](https://codecov.io/gh/pejath/qna/branch/master/graph/badge.svg)](https://codecov.io/gh/pejath/qna)
 # README
 
 Clone of Stack Overflow
